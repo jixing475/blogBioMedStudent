@@ -4,7 +4,7 @@ theme: assets/theme.css
 description: |
   Jixing's website and blog that mainly features about
   statistics, data science, Bioinformatics, R&Python and academia. 
-base_url: https://jixing.org
+base_url: https://jixing475.github.io/blogBioMedStudent/
 google_analytics: "UA-77195073-2"
 favicon: images/avatar.png
 twitter: 

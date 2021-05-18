@@ -8,8 +8,6 @@ output:
     template: assets/cv/template.html 
 ---
 
-
-
 <div id="canvas">
 
 <div class="profile-photo">
