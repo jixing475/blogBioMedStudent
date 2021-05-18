@@ -28,7 +28,7 @@ output:
 </script>
 
 <div class="l-body-outset">
-<a href="https://github.com/emitanaka">
+<a href="https://github.com/jixing475">
 <div class="calendar">
 Loading my github calendar data.
 </div>
@@ -41,7 +41,7 @@ GitHubCalendar(".calendar", "emitanaka", { responsive: true });
 
 <!-- ## You can find me at ... -->
 
-```{r eval=TRUE, include=FALSE}
+```{r eval=FALSE, include=FALSE}
 df <- data.frame(what = c('<i class="fab fa-twitter"></i>',
                            '<i class="fab fa-github"></i>',
                            '<i class="fas fa-envelope"></i>',

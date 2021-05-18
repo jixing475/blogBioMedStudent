@@ -1,5 +1,5 @@
 ---
-title: Jixing Liu
+title: BioMedStudent
 site: distill::distill_website
 ---
 <style>

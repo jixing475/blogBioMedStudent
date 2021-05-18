@@ -52,7 +52,7 @@ navbar:
     - icon: fab fa-github
       href: https://github.com/jixing475
     - icon: fab fa-twitter
-      href: https://twitter.com/statsgen
+      href: https://twitter.com/studentZero475
     - icon: fa fa-rss
       href: blog.xml
 output: distill::distill_article
