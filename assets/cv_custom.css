@@ -1,0 +1,87 @@
+#disclaimer, #disclaimer a {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#aside {
+  color: black;
+}
+
+#aside h2 {
+  color: #6A3FAD;
+}
+
+#aside a {
+  color: #6A3FAD;
+}
+
+#disclaimer {
+  display: none;
+}
+
+#canvas {
+    max-width: var(--page-width);
+    margin: auto;
+}
+
+.download {
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  width: 150px;
+  margin: auto;
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+  background-color: #6A3FAD;
+  color: white;
+  text-align: center;
+}
+
+
+h1, h2 {
+  font-family: var(--heading-font);
+}
+
+.container {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  z-index: 999; 
+  background-color: white;
+}
+
+
+@media (min-width: 768px) {
+ .navbar-expand-lg .navbar-toggler {
+    display: none;
+ }
+}
+
+.scroll a {
+  color: #6A3FAD;
+}
+
+button {
+    appearance: auto;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: #6A3FAD;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 6px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: #6A3FAD;
+    border-radius: 3px;
+    border-image: initial;
+}

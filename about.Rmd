@@ -1,0 +1,60 @@
+---
+title: "About"
+description: ""
+output:
+  html_document:
+    css: 
+      - assets/about.css
+    template: assets/cv/template.html 
+---
+
+
+
+<div id="canvas">
+
+<div class="profile-photo">
+<img  src="images/avatar.jpg" alt="Profile photo">  
+</div>
+
+<!-- I'm a lecturer (equivalent to assistant professor) in statistics at Monash -->
+<!-- University, Melbourne, Australia and part of the [NUMBATs group](https://numbat.space/). Research-wise, I'm interested in developing useful statistical tools and methods. My experience in application is in bioinformatics and agriculture (particularly crop breeding). My active research areas are **experimental design**, **mixed models** and **statistical graphics**.  -->
+
+
+<!-- I speak English, Japanese (conversational) and R (base + tidyverse) fluently. I've lived in Australia almost all of my life (+-10 years standard deviation) and my university major was mathematics and statistics. My PhD, obtained at the School of Mathematics and Statistics, University of Sydney in 2015, is in statistical bioinformatics with most of my code written in Python + Bash (both of which I am rusty now). I also like to dabble on front-end web development (HTML/CSS/JS). -->
+
+
+<script
+  src="https://unpkg.com/github-calendar@latest/dist/github-calendar.min.js">
+</script>
+
+<div class="l-body-outset">
+<a href="https://github.com/emitanaka">
+<div class="calendar">
+Loading my github calendar data.
+</div>
+</a>
+</div>
+
+<script>
+GitHubCalendar(".calendar", "emitanaka", { responsive: true });
+</script>
+
+<!-- ## You can find me at ... -->
+
+```{r eval=TRUE, include=FALSE}
+df <- data.frame(what = c('<i class="fab fa-twitter"></i>',
+                           '<i class="fab fa-github"></i>',
+                           '<i class="fas fa-envelope"></i>',
+                           '<i class="fas fa-map-marker-alt"></i>'),
+                 where = c("[ZERO](https://twitter.com/ZERO98446206)",
+                           "[Jixing](https://github.com/emitanaka)",
+                           "[jixing475@163.com](mailto:jixing475@163.com)",
+                           "Monash University<br>Monash Business School<br>Menzies Building E776<br>Clayton campus, VIC 3800<br>Australia"))
+knitr::kable(df, col.names = c("", ""), escape = FALSE)
+```
+
+<!-- <iframe src="https://www.google.com/maps/d/embed?mid=1EXPRDXpv02esVOHEyQuPPS8gogoyR9JX" width="640" height="480"></iframe> -->
+
+<!-- You can also find me at various conferences and events. I'm a regular at the [International Biometrics Australiasia Region Conferences](http://biometrics.org.au/conferences.html), involved a lot with [Statistical Society of Australia](https://www.statsoc.org.au/Events-listing) (mostly Victorian Branch) and attend [R-Ladies Melbourne](https://www.meetup.com/en-AU/rladies-melbourne/) (or other chapters sometimes).  -->
+
+</div>

@@ -1,0 +1,58 @@
+name: "BioMedStudent"
+title: "Jixing Liu"
+theme: assets/theme.css
+description: |
+  Jixing's website and blog that mainly features about
+  statistics, data science, Bioinformatics, R&Python and academia. 
+base_url: https://jixing.org
+google_analytics: "UA-77195073-2"
+favicon: images/avatar.png
+twitter: 
+  site: "@statsgen"
+repository_url: https://github.com/jixing475/jixing.github.io
+creative_commons: CC BY
+collections:
+  posts:
+    categories: true
+    categories_metadata: true
+    authors_metadata: false
+    feed_iems_max: 20 # default
+    disqus: statistical-genetics
+    share: [twitter, linkedin]
+    subscribe: _subscribe.html
+    custom: _custom.html
+  talks:
+    categories: true
+    categories_metadata: true
+    authors_metadata: false
+    feed_iems_max: 20 # default
+    disqus: statistical-genetics
+    share: [twitter, linkedin]
+output_dir: "docs"
+#cookie_consent:
+#  style: simple
+#  type: express
+#  palette: light
+#  lang: en
+#  cookies_policy: url
+navbar:
+  logo: 
+    image: images/avatar.png
+    href: https://jixing.org/
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Post"
+      href: blog.html
+    - text: "Resources"
+      href: resources.html
+    - text: "About"
+      href: about.html
+  right:
+    - icon: fab fa-github
+      href: https://github.com/jixing475
+    - icon: fab fa-twitter
+      href: https://twitter.com/statsgen
+    - icon: fa fa-rss
+      href: blog.xml
+output: distill::distill_article

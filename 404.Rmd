@@ -1,0 +1,18 @@
+
+
+<br>
+
+# Oops! The page you're looking for can't be found!
+
+<br>
+
+```{css echo = FALSE}
+d-title {
+  display: none;
+}
+```
+
+
+<center>
+<img src="images/avatar.png" style="width:200px">
+</center>

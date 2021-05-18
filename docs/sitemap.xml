@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
+  <url>
+    <loc>https://jixing.org/404.html</loc>
+    <lastmod>2021-05-18T16:21:11+08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://jixing.org/about.html</loc>
+    <lastmod>2021-05-18T16:34:31+08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://jixing.org/blog.html</loc>
+    <lastmod>2021-05-18T16:21:11+08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://jixing.org/</loc>
+    <lastmod>2021-05-18T16:21:11+08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://jixing.org/resources.html</loc>
+    <lastmod>2021-05-18T16:21:11+08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/</loc>
+    <lastmod>2021-05-18T16:21:11+08:00</lastmod>
+  </url>
+</urlset>

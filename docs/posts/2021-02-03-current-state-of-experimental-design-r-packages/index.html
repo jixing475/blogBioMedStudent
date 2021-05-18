@@ -1,0 +1,4331 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+<title>Jixing Liu: Current state of R packages for the design of experiments</title>
+
+<meta property="description" itemprop="description" content="Your analytical toolkit matters very little if the data are no good. Ideally you want to know to how the data were collected before delving into the analysis of the data; better yet, get involved _before_ the collection of data and design its collection. In this post I explore some of the top downloaded R packages for the design of experiments and analysis of experimental data."/>
+
+<link rel="canonical" href="https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/"/>
+<link rel="license" href="https://creativecommons.org/licenses/by/4.0/"/>
+<link rel="icon" type="image/png" href="../../images/avatar.png"/>
+
+<!--  https://schema.org/Article -->
+<meta property="article:published" itemprop="datePublished" content="2021-02-03"/>
+<meta property="article:created" itemprop="dateCreated" content="2021-02-03"/>
+<meta name="article:author" content="Jixing Liu"/>
+
+<!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+<meta property="og:title" content="Jixing Liu: Current state of R packages for the design of experiments"/>
+<meta property="og:type" content="article"/>
+<meta property="og:description" content="Your analytical toolkit matters very little if the data are no good. Ideally you want to know to how the data were collected before delving into the analysis of the data; better yet, get involved _before_ the collection of data and design its collection. In this post I explore some of the top downloaded R packages for the design of experiments and analysis of experimental data."/>
+<meta property="og:url" content="https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/"/>
+<meta property="og:image" content="https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/figures/download-timeplot-1.png"/>
+<meta property="og:image:width" content="1248"/>
+<meta property="og:image:height" content="1344"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:site_name" content="Jixing Liu"/>
+
+<!--  https://dev.twitter.com/cards/types/summary -->
+<meta property="twitter:card" content="summary_large_image"/>
+<meta property="twitter:title" content="Jixing Liu: Current state of R packages for the design of experiments"/>
+<meta property="twitter:description" content="Your analytical toolkit matters very little if the data are no good. Ideally you want to know to how the data were collected before delving into the analysis of the data; better yet, get involved _before_ the collection of data and design its collection. In this post I explore some of the top downloaded R packages for the design of experiments and analysis of experimental data."/>
+<meta property="twitter:url" content="https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/"/>
+<meta property="twitter:image" content="https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/figures/download-timeplot-1.png"/>
+<meta property="twitter:image:width" content="1248"/>
+<meta property="twitter:image:height" content="1344"/>
+<meta property="twitter:site" content="@statsgen"/>
+<meta property="twitter:creator" content="@statsgen"/>
+
+<!--  https://scholar.google.com/intl/en/scholar/inclusion.html#indexing -->
+<meta name="citation_title" content="Jixing Liu: Current state of R packages for the design of experiments"/>
+<meta name="citation_fulltext_html_url" content="https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/"/>
+<meta name="citation_fulltext_world_readable" content=""/>
+<meta name="citation_online_date" content="2021/02/03"/>
+<meta name="citation_publication_date" content="2021/02/03"/>
+<meta name="citation_author" content="Jixing Liu"/>
+<meta name="citation_author_institution" content="Monash University"/>
+<!--/radix_placeholder_meta_tags-->
+  
+  <meta name="citation_reference" content="citation_title=Agricolae: Statistical procedures for agricultural research;citation_publication_date=2020;citation_author=Felipe de Mendiburu"/>
+  <meta name="citation_reference" content="citation_title=AlgDesign: Algorithmic experimental design;citation_publication_date=2019;citation_author=Bob Wheeler"/>
+  <meta name="citation_reference" content="citation_title=Lhs: Latin hypercube samples;citation_publication_date=2020;citation_author=Rob Carnell"/>
+  <meta name="citation_reference" content="citation_title=Ez: Easy analysis and visualization of factorial experiments;citation_publication_date=2016;citation_author=Michael A. Lawrence"/>
+  <meta name="citation_reference" content="citation_title=R package &lt;span class=&quot;nocase&quot;&gt;DoE.base&lt;/span&gt; for factorial experiments;citation_publication_date=2018;citation_volume=85;citation_doi=10.18637/jss.v085.i05;citation_author=Ulrike Grömping"/>
+  <meta name="citation_reference" content="citation_title=The initial examination of data;citation_publication_date=1985;citation_volume=148;citation_author=C Chatfield"/>
+  <meta name="citation_reference" content="citation_title=Adjustedcranlogs: Remove automated and repeated downloads from ’rstudio’ ’cran’ download logs;citation_publication_date=2017;citation_author=Tyler Morgan-Wall"/>
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+<script type="text/json" id="radix-rmarkdown-metadata">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creative_commons","title","description","author","date","draft","bibliography","base_url","twitter","categories","output","citation_url","canonical_url"]}},"value":[{"type":"character","attributes":{},"value":["CC BY"]},{"type":"character","attributes":{},"value":["Current state of R packages for the design of experiments"]},{"type":"character","attributes":{},"value":["Your analytical toolkit matters very little if the data are no good. Ideally you want to know to how the data were collected before delving into the analysis of the data; better yet, get involved _before_ the collection of data and design its collection. In this post I explore some of the top downloaded R packages for the design of experiments and analysis of experimental data."]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Jixing Liu"]},{"type":"character","attributes":{},"value":["https://emitanaka.org"]},{"type":"character","attributes":{},"value":["Monash University"]},{"type":"character","attributes":{},"value":["https://numbat.space/"]}]}]},{"type":"character","attributes":{},"value":["2021-02-03"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["ref.bib"]},{"type":"character","attributes":{},"value":["http://emitanaka.org/"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["creator"]}},"value":[{"type":"character","attributes":{},"value":["@statsgen"]}]},{"type":"character","attributes":{},"value":["experimental design","R"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","highlight","toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["default"]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/"]},{"type":"character","attributes":{},"value":["https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/"]}]}
+</script>
+<!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["cache/__packages","cache/algdesign_bc085b1edb25cb4bee0ead0714d8a9eb.RData","cache/algdesign_bc085b1edb25cb4bee0ead0714d8a9eb.rdb","cache/algdesign_bc085b1edb25cb4bee0ead0714d8a9eb.rdx","cache/algdesign-BIBD_76ca1366c826c4da30c1b5e36e3cf507.RData","cache/algdesign-BIBD_76ca1366c826c4da30c1b5e36e3cf507.rdb","cache/algdesign-BIBD_76ca1366c826c4da30c1b5e36e3cf507.rdx","cache/bigram_df9b97f4348547d924b3285d69dd42b7.RData","cache/bigram_df9b97f4348547d924b3285d69dd42b7.rdb","cache/bigram_df9b97f4348547d924b3285d69dd42b7.rdx","cache/bigram-desc_e39ec38a14161a555a0d46d1a3af54a9.RData","cache/bigram-desc_e39ec38a14161a555a0d46d1a3af54a9.rdb","cache/bigram-desc_e39ec38a14161a555a0d46d1a3af54a9.rdx","cache/bigram-title_9be148bd0335ac299ed99b5369730809.RData","cache/bigram-title_9be148bd0335ac299ed99b5369730809.rdb","cache/bigram-title_9be148bd0335ac299ed99b5369730809.rdx","cache/cran-data_edf9b7459292b0f720b028b5d5b8386f.RData","cache/cran-data_edf9b7459292b0f720b028b5d5b8386f.rdb","cache/cran-data_edf9b7459292b0f720b028b5d5b8386f.rdx","cache/cran-titles_5b044ebdff1061510d04d4cf7a0d3027.RData","cache/cran-titles_5b044ebdff1061510d04d4cf7a0d3027.rdb","cache/cran-titles_5b044ebdff1061510d04d4cf7a0d3027.rdx","cache/data-collection_ed611235af529106244d4864297c23fc.RData","cache/data-collection_ed611235af529106244d4864297c23fc.rdb","cache/data-collection_ed611235af529106244d4864297c23fc.rdx","cache/doe-cran_f12147a2b09a68c6e86cc0f2ffe1171e.RData","cache/doe-cran_f12147a2b09a68c6e86cc0f2ffe1171e.rdb","cache/doe-cran_f12147a2b09a68c6e86cc0f2ffe1171e.rdx","cache/doe-network_70bc6411fa7dd7b3e8f7c30ad8b7fec5.RData","cache/doe-network_70bc6411fa7dd7b3e8f7c30ad8b7fec5.rdb","cache/doe-network_70bc6411fa7dd7b3e8f7c30ad8b7fec5.rdx","cache/download-barplot_859fd73658e851a8e8a4fc3f2b883bca.RData","cache/download-barplot_859fd73658e851a8e8a4fc3f2b883bca.rdb","cache/download-barplot_859fd73658e851a8e8a4fc3f2b883bca.rdx","cache/download-hist_e93e4947b557224c1244dadc8f668349.RData","cache/download-hist_e93e4947b557224c1244dadc8f668349.rdb","cache/download-hist_e93e4947b557224c1244dadc8f668349.rdx","cache/download-timeplot_ac8ae8ef9ab5ad1db304d0a9b2ccf0e1.RData","cache/download-timeplot_ac8ae8ef9ab5ad1db304d0a9b2ccf0e1.rdb","cache/download-timeplot_ac8ae8ef9ab5ad1db304d0a9b2ccf0e1.rdx","cache/pkg-updates_6913dd064c01ed54f108200beea9e702.RData","cache/pkg-updates_6913dd064c01ed54f108200beea9e702.rdb","cache/pkg-updates_6913dd064c01ed54f108200beea9e702.rdx","cache/setup_694621d99a016ce56ea717455dba783e.RData","cache/setup_694621d99a016ce56ea717455dba783e.rdb","cache/setup_694621d99a016ce56ea717455dba783e.rdx","cache/top5_e67598145cb1f53cb962586a6654ca53.RData","cache/top5_e67598145cb1f53cb962586a6654ca53.rdb","cache/top5_e67598145cb1f53cb962586a6654ca53.rdx","cache/unnamed-chunk-1_c4f14df6fdc3c64409e7144b637b1d04.RData","cache/unnamed-chunk-1_c4f14df6fdc3c64409e7144b637b1d04.rdb","cache/unnamed-chunk-1_c4f14df6fdc3c64409e7144b637b1d04.rdx","cache/unnamed-chunk-10_46a40f5a1453a2bf9dc4b51f699b4a79.RData","cache/unnamed-chunk-10_46a40f5a1453a2bf9dc4b51f699b4a79.rdb","cache/unnamed-chunk-10_46a40f5a1453a2bf9dc4b51f699b4a79.rdx","cache/unnamed-chunk-11_a33f069a8ae404f70b17ccabae70ccf5.RData","cache/unnamed-chunk-11_a33f069a8ae404f70b17ccabae70ccf5.rdb","cache/unnamed-chunk-11_a33f069a8ae404f70b17ccabae70ccf5.rdx","cache/unnamed-chunk-12_5ca69a615a669f15d4addd98a0368dbd.RData","cache/unnamed-chunk-12_5ca69a615a669f15d4addd98a0368dbd.rdb","cache/unnamed-chunk-12_5ca69a615a669f15d4addd98a0368dbd.rdx","cache/unnamed-chunk-13_3b4d4310838adaa2658db8415cd351a5.RData","cache/unnamed-chunk-13_3b4d4310838adaa2658db8415cd351a5.rdb","cache/unnamed-chunk-13_3b4d4310838adaa2658db8415cd351a5.rdx","cache/unnamed-chunk-14_eade147082d37dc5d1063f7bf1da3e3d.RData","cache/unnamed-chunk-14_eade147082d37dc5d1063f7bf1da3e3d.rdb","cache/unnamed-chunk-14_eade147082d37dc5d1063f7bf1da3e3d.rdx","cache/unnamed-chunk-15_655865cd701bdb515d493e0ba632899e.RData","cache/unnamed-chunk-15_655865cd701bdb515d493e0ba632899e.rdb","cache/unnamed-chunk-15_655865cd701bdb515d493e0ba632899e.rdx","cache/unnamed-chunk-16_dfc132857994096348b02d74f2960209.RData","cache/unnamed-chunk-16_dfc132857994096348b02d74f2960209.rdb","cache/unnamed-chunk-16_dfc132857994096348b02d74f2960209.rdx","cache/unnamed-chunk-17_4388f8917d68b03cc2a25efe1dcb70d9.RData","cache/unnamed-chunk-17_4388f8917d68b03cc2a25efe1dcb70d9.rdb","cache/unnamed-chunk-17_4388f8917d68b03cc2a25efe1dcb70d9.rdx","cache/unnamed-chunk-18_34d9746a9a9373b3afa268626bd91fd9.RData","cache/unnamed-chunk-18_34d9746a9a9373b3afa268626bd91fd9.rdb","cache/unnamed-chunk-18_34d9746a9a9373b3afa268626bd91fd9.rdx","cache/unnamed-chunk-19_51f9a5beec8951bfe71586a7dcf2a53c.RData","cache/unnamed-chunk-19_51f9a5beec8951bfe71586a7dcf2a53c.rdb","cache/unnamed-chunk-19_51f9a5beec8951bfe71586a7dcf2a53c.rdx","cache/unnamed-chunk-2_15079ad227363fe1072cd0f550a2f339.RData","cache/unnamed-chunk-2_15079ad227363fe1072cd0f550a2f339.rdb","cache/unnamed-chunk-2_15079ad227363fe1072cd0f550a2f339.rdx","cache/unnamed-chunk-3_f4eb7149f3e4e458312e2ba7e0b7d5be.RData","cache/unnamed-chunk-3_f4eb7149f3e4e458312e2ba7e0b7d5be.rdb","cache/unnamed-chunk-3_f4eb7149f3e4e458312e2ba7e0b7d5be.rdx","cache/unnamed-chunk-4_d95686dce25009317ea66efd59211e45.RData","cache/unnamed-chunk-4_d95686dce25009317ea66efd59211e45.rdb","cache/unnamed-chunk-4_d95686dce25009317ea66efd59211e45.rdx","cache/unnamed-chunk-5_37ba40ffeeecfd4286997feb8b263b00.RData","cache/unnamed-chunk-5_37ba40ffeeecfd4286997feb8b263b00.rdb","cache/unnamed-chunk-5_37ba40ffeeecfd4286997feb8b263b00.rdx","cache/unnamed-chunk-6_ee76bcaedd21f81f719722ff07cf7d4e.RData","cache/unnamed-chunk-6_ee76bcaedd21f81f719722ff07cf7d4e.rdb","cache/unnamed-chunk-6_ee76bcaedd21f81f719722ff07cf7d4e.rdx","cache/unnamed-chunk-7_4db34ff8343f7114bc9ed051bae45008.RData","cache/unnamed-chunk-7_4db34ff8343f7114bc9ed051bae45008.rdb","cache/unnamed-chunk-7_4db34ff8343f7114bc9ed051bae45008.rdx","cache/unnamed-chunk-8_49bc5f858019c82382d5fbb45b2813e7.RData","cache/unnamed-chunk-8_49bc5f858019c82382d5fbb45b2813e7.rdb","cache/unnamed-chunk-8_49bc5f858019c82382d5fbb45b2813e7.rdx","cache/unnamed-chunk-9_6345f057e86480826fc3298244e3e7a4.RData","cache/unnamed-chunk-9_6345f057e86480826fc3298244e3e7a4.rdb","cache/unnamed-chunk-9_6345f057e86480826fc3298244e3e7a4.rdx","current-state-of-experimental-design-r-packages_files/anchor-4.2.2/anchor.min.js","current-state-of-experimental-design-r-packages_files/bowser-1.9.3/bowser.min.js","current-state-of-experimental-design-r-packages_files/distill-2.2.21/template.v2.js","current-state-of-experimental-design-r-packages_files/header-attrs-2.6.6/header-attrs.js","current-state-of-experimental-design-r-packages_files/jquery-1.11.3/jquery.min.js","current-state-of-experimental-design-r-packages_files/kePrint-0.0.1/kePrint.js","current-state-of-experimental-design-r-packages_files/lightable-0.0.1/lightable.css","current-state-of-experimental-design-r-packages_files/popper-2.6.0/popper.min.js","current-state-of-experimental-design-r-packages_files/tippy-6.2.7/tippy-bundle.umd.min.js","current-state-of-experimental-design-r-packages_files/tippy-6.2.7/tippy-light-border.css","current-state-of-experimental-design-r-packages_files/tippy-6.2.7/tippy.css","current-state-of-experimental-design-r-packages_files/tippy-6.2.7/tippy.umd.min.js","current-state-of-experimental-design-r-packages_files/webcomponents-2.0.0/webcomponents.js","figures/doe-network-1.png","figures/download-barplot-1.png","figures/download-hist-1.png","figures/download-timeplot-1.png","figures/unnamed-chunk-10-1.png","figures/unnamed-chunk-11-1.png","figures/unnamed-chunk-12-1.png","figures/unnamed-chunk-13-1.png","figures/unnamed-chunk-14-1.png","figures/unnamed-chunk-15-1.png","ref.bib"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content="../.."/>
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      tolerance: 5,
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0F2E3D;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+/* adjust viewport for navbar height */
+/* helps vertically center bootstrap (non-distill) content */
+.min-vh-100 {
+  min-height: calc(100vh - 100px) !important;
+}
+
+</style>
+
+<script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+<link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="../../site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="../../site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+              : '';
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description || ''}
+                </div>
+                <div class="search-item-preview">
+                  ${img}
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+.nav-search {
+  font-size: x-small;
+}
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  font-size: 1rem;
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
+<!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+<style type="text/css">
+
+body {
+  background-color: white;
+}
+
+.pandoc-table {
+  width: 100%;
+}
+
+.pandoc-table>caption {
+  margin-bottom: 10px;
+}
+
+.pandoc-table th:not([align]) {
+  text-align: left;
+}
+
+.pagedtable-footer {
+  font-size: 15px;
+}
+
+d-byline .byline {
+  grid-template-columns: 2fr 2fr;
+}
+
+d-byline .byline h3 {
+  margin-block-start: 1.5em;
+}
+
+d-byline .byline .authors-affiliations h3 {
+  margin-block-start: 0.5em;
+}
+
+.authors-affiliations .orcid-id {
+  width: 16px;
+  height:16px;
+  margin-left: 4px;
+  margin-right: 4px;
+  vertical-align: middle;
+  padding-bottom: 2px;
+}
+
+d-title .dt-tags {
+  margin-top: 1em;
+  grid-column: text;
+}
+
+.dt-tags .dt-tag {
+  text-decoration: none;
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0em 0.4em;
+  margin-right: 0.5em;
+  margin-bottom: 0.4em;
+  font-size: 70%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+d-article table.gt_table td,
+d-article table.gt_table th {
+  border-bottom: none;
+}
+
+.html-widget {
+  margin-bottom: 2.0em;
+}
+
+.l-screen-inset {
+  padding-right: 16px;
+}
+
+.l-screen .caption {
+  margin-left: 10px;
+}
+
+.shaded {
+  background: rgb(247, 247, 247);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .html-widget {
+  margin-bottom: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.shaded .shaded-content {
+  background: white;
+}
+
+.text-output {
+  margin-top: 0;
+  line-height: 1.5em;
+}
+
+.hidden {
+  display: none !important;
+}
+
+d-article {
+  padding-top: 2.5rem;
+  padding-bottom: 30px;
+}
+
+d-appendix {
+  padding-top: 30px;
+}
+
+d-article>p>img {
+  width: 100%;
+}
+
+d-article h2 {
+  margin: 1rem 0 1.5rem 0;
+}
+
+d-article h3 {
+  margin-top: 1.5rem;
+}
+
+d-article iframe {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 2.0em;
+  width: 100%;
+}
+
+/* Tweak code blocks */
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+}
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: auto;
+}
+
+d-article div.sourceCode {
+  background-color: white;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 10px;
+  font-size: 12px;
+  border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+d-article pre {
+  font-size: 12px;
+  color: black;
+  background: none;
+  margin-top: 0;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+d-article pre a {
+  border-bottom: none;
+}
+
+d-article pre a:hover {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+d-article details {
+  grid-column: text;
+  margin-bottom: 0.8em;
+}
+
+@media(min-width: 768px) {
+
+d-article pre,
+d-article div.sourceCode,
+d-article div.sourceCode pre {
+  overflow: visible !important;
+}
+
+d-article div.sourceCode pre {
+  padding-left: 18px;
+  font-size: 14px;
+}
+
+d-article pre {
+  font-size: 14px;
+}
+
+}
+
+figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+/* CSS for d-contents */
+
+.d-contents {
+  grid-column: text;
+  color: rgba(0,0,0,0.8);
+  font-size: 0.9em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+  padding-left: 0.25em;
+  justify-self: start;
+}
+
+@media(min-width: 1000px) {
+  .d-contents.d-contents-float {
+    height: 0;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    justify-self: center;
+    padding-right: 3em;
+    padding-left: 2em;
+  }
+}
+
+.d-contents nav h3 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.d-contents li {
+  list-style-type: none
+}
+
+.d-contents nav > ul {
+  padding-left: 0;
+}
+
+.d-contents ul {
+  padding-left: 1em
+}
+
+.d-contents nav ul li {
+  margin-top: 0.6em;
+  margin-bottom: 0.2em;
+}
+
+.d-contents nav a {
+  font-size: 13px;
+  border-bottom: none;
+  text-decoration: none
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.d-contents nav a:hover {
+  text-decoration: underline solid rgba(0, 0, 0, 0.6)
+}
+
+.d-contents nav > ul > li > a {
+  font-weight: 600;
+}
+
+.d-contents nav > ul > li > ul {
+  font-weight: inherit;
+}
+
+.d-contents nav > ul > li > ul > li {
+  margin-top: 0.2em;
+}
+
+
+.d-contents nav ul {
+  margin-top: 0;
+  margin-bottom: 0.25em;
+}
+
+.d-article-with-toc h2:nth-child(2) {
+  margin-top: 0;
+}
+
+
+/* Figure */
+
+.figure {
+  position: relative;
+  margin-bottom: 2.5em;
+  margin-top: 1.5em;
+}
+
+.figure img {
+  width: 100%;
+}
+
+.figure .caption {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 12px;
+  line-height: 1.5em;
+}
+
+.figure img.external {
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.figure .caption a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.figure .caption b,
+.figure .caption strong, {
+  font-weight: 600;
+  color: rgba(0, 0, 0, 1.0);
+}
+
+/* Citations */
+
+d-article .citation {
+  color: inherit;
+  cursor: inherit;
+}
+
+div.hanging-indent{
+  margin-left: 1em; text-indent: -1em;
+}
+
+/* Citation hover box */
+
+.tippy-box[data-theme~=light-border] {
+  background-color: rgba(250, 250, 250, 0.95);
+}
+
+.tippy-content > p {
+  margin-bottom: 0;
+  padding: 2px;
+}
+
+
+/* Tweak 1000px media break to show more text */
+
+@media(min-width: 1000px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 16px;
+  }
+
+  .grid {
+    grid-column-gap: 16px;
+  }
+
+  d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+  }
+  figure .caption, .figure .caption, figure figcaption {
+    font-size: 13px;
+  }
+}
+
+@media(min-width: 1180px) {
+  .base-grid,
+  distill-header,
+  d-title,
+  d-abstract,
+  d-article,
+  d-appendix,
+  distill-appendix,
+  d-byline,
+  d-footnote-list,
+  d-citation-list,
+  distill-footer {
+    grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+    grid-column-gap: 32px;
+  }
+
+  .grid {
+    grid-column-gap: 32px;
+  }
+}
+
+
+/* Get the citation styles for the appendix (not auto-injected on render since
+   we do our own rendering of the citation appendix) */
+
+d-appendix .citation-appendix,
+.d-appendix .citation-appendix {
+  font-size: 11px;
+  line-height: 15px;
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  padding-left: 18px;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 18px;
+  border-radius: 3px;
+  color: rgba(150, 150, 150, 1);
+  overflow: hidden;
+  margin-top: -12px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* Include appendix styles here so they can be overridden */
+
+d-appendix {
+  contain: layout style;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-top: 60px;
+  margin-bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+  padding-bottom: 48px;
+}
+
+d-appendix h3 {
+  grid-column: page-start / text-start;
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 1em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.65);
+}
+
+d-appendix h3 + * {
+  margin-top: 1em;
+}
+
+d-appendix ol {
+  padding: 0 0 0 15px;
+}
+
+@media (min-width: 768px) {
+  d-appendix ol {
+    padding: 0 0 0 30px;
+    margin-left: -30px;
+  }
+}
+
+d-appendix li {
+  margin-bottom: 1em;
+}
+
+d-appendix a {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+d-appendix > * {
+  grid-column: text;
+}
+
+d-appendix > d-footnote-list,
+d-appendix > d-citation-list,
+d-appendix > distill-appendix {
+  grid-column: screen;
+}
+
+/* Include footnote styles here so they can be overridden */
+
+d-footnote-list {
+  contain: layout style;
+}
+
+d-footnote-list > * {
+  grid-column: text;
+}
+
+d-footnote-list a.footnote-backlink {
+  color: rgba(0,0,0,0.3);
+  padding-left: 0.5em;
+}
+
+
+
+/* Anchor.js */
+
+.anchorjs-link {
+  /*transition: all .25s linear; */
+  text-decoration: none;
+  border-bottom: none;
+}
+*:hover > .anchorjs-link {
+  margin-left: -1.125em !important;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+/* Social footer */
+
+.social_footer {
+  margin-top: 30px;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.67);
+}
+
+.disqus-comments {
+  margin-right: 30px;
+}
+
+.disqus-comment-count {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+#disqus_thread {
+  margin-top: 30px;
+}
+
+.article-sharing a {
+  border-bottom: none;
+  margin-right: 8px;
+}
+
+.article-sharing a:hover {
+  border-bottom: none;
+}
+
+.sidebar-section.subscribe {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.subscribe p {
+  margin-bottom: 0.5em;
+}
+
+
+.article-footer .subscribe {
+  font-size: 15px;
+  margin-top: 45px;
+}
+
+
+.sidebar-section.custom {
+  font-size: 12px;
+  line-height: 1.6em;
+}
+
+.custom p {
+  margin-bottom: 0.5em;
+}
+
+/* Styles for listing layout (hide title) */
+.layout-listing d-title, .layout-listing .d-title {
+  display: none;
+}
+
+/* Styles for posts lists (not auto-injected) */
+
+
+.posts-with-sidebar {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.posts-list .description h2,
+.posts-list .description p {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.posts-list .description h2 {
+  font-weight: 700;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.posts-list h2.post-tag {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-bottom: 12px;
+}
+.posts-list {
+  margin-top: 60px;
+  margin-bottom: 24px;
+}
+
+.posts-list .post-preview {
+  text-decoration: none;
+  overflow: hidden;
+  display: block;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 24px 0;
+}
+
+.post-preview-last {
+  border-bottom: none !important;
+}
+
+.posts-list .posts-list-caption {
+  grid-column: screen;
+  font-weight: 400;
+}
+
+.posts-list .post-preview h2 {
+  margin: 0 0 6px 0;
+  line-height: 1.2em;
+  font-style: normal;
+  font-size: 24px;
+}
+
+.posts-list .post-preview p {
+  margin: 0 0 12px 0;
+  line-height: 1.4em;
+  font-size: 16px;
+}
+
+.posts-list .post-preview .thumbnail {
+  box-sizing: border-box;
+  margin-bottom: 24px;
+  position: relative;
+  max-width: 500px;
+}
+.posts-list .post-preview img {
+  width: 100%;
+  display: block;
+}
+
+.posts-list .metadata {
+  font-size: 12px;
+  line-height: 1.4em;
+  margin-bottom: 18px;
+}
+
+.posts-list .metadata > * {
+  display: inline-block;
+}
+
+.posts-list .metadata .publishedDate {
+  margin-right: 2em;
+}
+
+.posts-list .metadata .dt-authors {
+  display: block;
+  margin-top: 0.3em;
+  margin-right: 2em;
+}
+
+.posts-list .dt-tags {
+  display: block;
+  line-height: 1em;
+}
+
+.posts-list .dt-tags .dt-tag {
+  display: inline-block;
+  color: rgba(0,0,0,0.6);
+  padding: 0.3em 0.4em;
+  margin-right: 0.2em;
+  margin-bottom: 0.4em;
+  font-size: 60%;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.posts-list img {
+  opacity: 1;
+}
+
+.posts-list img[data-src] {
+  opacity: 0;
+}
+
+.posts-more {
+  clear: both;
+}
+
+
+.posts-sidebar {
+  font-size: 16px;
+}
+
+.posts-sidebar h3 {
+  font-size: 16px;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.sidebar-section {
+  margin-bottom: 30px;
+}
+
+.categories ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories li {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 0;
+}
+
+.categories li>a {
+  border-bottom: none;
+}
+
+.categories li>a:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+}
+
+.categories .active {
+  font-weight: 600;
+}
+
+.categories .category-count {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+
+@media(min-width: 768px) {
+  .posts-list .post-preview h2 {
+    font-size: 26px;
+  }
+  .posts-list .post-preview .thumbnail {
+    float: right;
+    width: 30%;
+    margin-bottom: 0;
+  }
+  .posts-list .post-preview .description {
+    float: left;
+    width: 45%;
+  }
+  .posts-list .post-preview .metadata {
+    float: left;
+    width: 20%;
+    margin-top: 8px;
+  }
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.5em;
+    font-size: 16px;
+  }
+  .posts-with-sidebar .posts-list {
+    float: left;
+    width: 75%;
+  }
+  .posts-with-sidebar .posts-sidebar {
+    float: right;
+    width: 20%;
+    margin-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+
+
+/* Improve display for browsers without grid (IE/Edge <= 15) */
+
+.downlevel {
+  line-height: 1.6em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+}
+
+.downlevel .d-title {
+  padding-top: 6rem;
+  padding-bottom: 1.5rem;
+}
+
+.downlevel .d-title h1 {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.1em;
+  margin: 0 0 0.5rem;
+}
+
+.downlevel .d-title p {
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 1.55em;
+  margin-top: 0;
+}
+
+.downlevel .d-byline {
+  padding-top: 0.8em;
+  padding-bottom: 0.8em;
+  font-size: 0.8rem;
+  line-height: 1.8em;
+}
+
+.downlevel .section-separator {
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.downlevel .d-article {
+  font-size: 1.06rem;
+  line-height: 1.7em;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+
+.downlevel .d-appendix {
+  padding-left: 0;
+  padding-right: 0;
+  max-width: none;
+  font-size: 0.8em;
+  line-height: 1.7em;
+  margin-bottom: 0;
+  color: rgba(0,0,0,0.5);
+  padding-top: 40px;
+  padding-bottom: 48px;
+}
+
+.downlevel .footnotes ol {
+  padding-left: 13px;
+}
+
+.downlevel .base-grid,
+.downlevel .distill-header,
+.downlevel .d-title,
+.downlevel .d-abstract,
+.downlevel .d-article,
+.downlevel .d-appendix,
+.downlevel .distill-appendix,
+.downlevel .d-byline,
+.downlevel .d-footnote-list,
+.downlevel .d-citation-list,
+.downlevel .distill-footer,
+.downlevel .appendix-bottom,
+.downlevel .posts-container {
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+@media(min-width: 768px) {
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+  padding-left: 150px;
+  padding-right: 150px;
+  max-width: 900px;
+}
+}
+
+.downlevel pre code {
+  display: block;
+  border-left: 2px solid rgba(0, 0, 0, .1);
+  padding: 0 0 0 20px;
+  font-size: 14px;
+}
+
+.downlevel code, .downlevel pre {
+  color: black;
+  background: none;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+.downlevel .posts-list .post-preview {
+  color: inherit;
+}
+
+
+
+</style>
+
+<script type="application/javascript">
+
+function is_downlevel_browser() {
+  if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                 window.navigator.userAgent)) {
+    return true;
+  } else {
+    return window.load_distill_framework === undefined;
+  }
+}
+
+// show body when load is complete
+function on_load_complete() {
+
+  // add anchors
+  if (window.anchors) {
+    window.anchors.options.placement = 'left';
+    window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+  }
+
+
+  // set body to visible
+  document.body.style.visibility = 'visible';
+
+  // force redraw for leaflet widgets
+  if (window.HTMLWidgets) {
+    var maps = window.HTMLWidgets.findAll(".leaflet");
+    $.each(maps, function(i, el) {
+      var map = this.getMap();
+      map.invalidateSize();
+      map.eachLayer(function(layer) {
+        if (layer instanceof L.TileLayer)
+          layer.redraw();
+      });
+    });
+  }
+
+  // trigger 'shown' so htmlwidgets resize
+  $('d-article').trigger('shown');
+}
+
+function init_distill() {
+
+  init_common();
+
+  // create front matter
+  var front_matter = $('<d-front-matter></d-front-matter>');
+  $('#distill-front-matter').wrap(front_matter);
+
+  // create d-title
+  $('.d-title').changeElementType('d-title');
+
+  // create d-byline
+  var byline = $('<d-byline></d-byline>');
+  $('.d-byline').replaceWith(byline);
+
+  // create d-article
+  var article = $('<d-article></d-article>');
+  $('.d-article').wrap(article).children().unwrap();
+
+  // move posts container into article
+  $('.posts-container').appendTo($('d-article'));
+
+  // create d-appendix
+  $('.d-appendix').changeElementType('d-appendix');
+
+  // flag indicating that we have appendix items
+  var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+  // replace footnotes with <d-footnote>
+  $('.footnote-ref').each(function(i, val) {
+    appendix = true;
+    var href = $(this).attr('href');
+    var id = href.replace('#', '');
+    var fn = $('#' + id);
+    var fn_p = $('#' + id + '>p');
+    fn_p.find('.footnote-back').remove();
+    var text = fn_p.html();
+    var dtfn = $('<d-footnote></d-footnote>');
+    dtfn.html(text);
+    $(this).replaceWith(dtfn);
+  });
+  // remove footnotes
+  $('.footnotes').remove();
+
+  // move refs into #references-listing
+  $('#references-listing').replaceWith($('#refs'));
+
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    var id = $(this).attr('id');
+    $('.d-contents a[href="#' + id + '"]').parent().remove();
+    appendix = true;
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+  });
+
+  // show d-appendix if we have appendix content
+  $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+  // localize layout chunks to just output
+  $('.layout-chunk').each(function(i, val) {
+
+    // capture layout
+    var layout = $(this).attr('data-layout');
+
+    // apply layout to markdown level block elements
+    var elements = $(this).children().not('details, div.sourceCode, pre, script');
+    elements.each(function(i, el) {
+      var layout_div = $('<div class="' + layout + '"></div>');
+      if (layout_div.hasClass('shaded')) {
+        var shaded_content = $('<div class="shaded-content"></div>');
+        $(this).wrap(shaded_content);
+        $(this).parent().wrap(layout_div);
+      } else {
+        $(this).wrap(layout_div);
+      }
+    });
+
+
+    // unwrap the layout-chunk div
+    $(this).children().unwrap();
+  });
+
+  // remove code block used to force  highlighting css
+  $('.distill-force-highlighting-css').parent().remove();
+
+  // remove empty line numbers inserted by pandoc when using a
+  // custom syntax highlighting theme
+  $('code.sourceCode a:empty').remove();
+
+  // load distill framework
+  load_distill_framework();
+
+  // wait for window.distillRunlevel == 4 to do post processing
+  function distill_post_process() {
+
+    if (!window.distillRunlevel || window.distillRunlevel < 4)
+      return;
+
+    // hide author/affiliations entirely if we have no authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+    if (!have_authors)
+      $('d-byline').addClass('hidden');
+
+    // article with toc class
+    $('.d-contents').parent().addClass('d-article-with-toc');
+
+    // strip links that point to #
+    $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+    // add orcid ids
+    $('.authors-affiliations').find('.author').each(function(i, el) {
+      var orcid_id = front_matter.authors[i].orcidID;
+      if (orcid_id) {
+        var a = $('<a></a>');
+        a.attr('href', 'https://orcid.org/' + orcid_id);
+        var img = $('<img></img>');
+        img.addClass('orcid-id');
+        img.attr('alt', 'ORCID ID');
+        img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+        a.append(img);
+        $(this).append(a);
+      }
+    });
+
+    // hide elements of author/affiliations grid that have no value
+    function hide_byline_column(caption) {
+      $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+    }
+
+    // affiliations
+    var have_affiliations = false;
+    for (var i = 0; i<front_matter.authors.length; ++i) {
+      var author = front_matter.authors[i];
+      if (author.affiliation !== "&nbsp;") {
+        have_affiliations = true;
+        break;
+      }
+    }
+    if (!have_affiliations)
+      $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+    // published date
+    if (!front_matter.publishedDate)
+      hide_byline_column("Published");
+
+    // document object identifier
+    var doi = $('d-byline').find('h3:contains("DOI")');
+    var doi_p = doi.next().empty();
+    if (!front_matter.doi) {
+      // if we have a citation and valid citationText then link to that
+      if ($('#citation').length > 0 && front_matter.citationText) {
+        doi.html('Citation');
+        $('<a href="#citation"></a>')
+          .text(front_matter.citationText)
+          .appendTo(doi_p);
+      } else {
+        hide_byline_column("DOI");
+      }
+    } else {
+      $('<a></a>')
+         .attr('href', "https://doi.org/" + front_matter.doi)
+         .html(front_matter.doi)
+         .appendTo(doi_p);
+    }
+
+     // change plural form of authors/affiliations
+    if (front_matter.authors.length === 1) {
+      var grid = $('.authors-affiliations');
+      grid.children('h3:contains("Authors")').text('Author');
+      grid.children('h3:contains("Affiliations")').text('Affiliation');
+    }
+
+    // remove d-appendix and d-footnote-list local styles
+    $('d-appendix > style:first-child').remove();
+    $('d-footnote-list > style:first-child').remove();
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // hoverable references
+    $('span.citation[data-cites]').each(function() {
+      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+      window.tippy(this, {
+        allowHTML: true,
+        content: refHtml,
+        maxWidth: 500,
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'light-border',
+        placement: 'bottom-start'
+      });
+    });
+
+    // clear polling timer
+    clearInterval(tid);
+
+    // show body now that everything is ready
+    on_load_complete();
+  }
+
+  var tid = setInterval(distill_post_process, 50);
+  distill_post_process();
+
+}
+
+function init_downlevel() {
+
+  init_common();
+
+   // insert hr after d-title
+  $('.d-title').after($('<hr class="section-separator"/>'));
+
+  // check if we have authors
+  var front_matter = JSON.parse($("#distill-front-matter").html());
+  var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+  // manage byline/border
+  if (!have_authors)
+    $('.d-byline').remove();
+  $('.d-byline').after($('<hr class="section-separator"/>'));
+  $('.d-byline a').remove();
+
+  // remove toc
+  $('.d-contents').remove();
+
+  // move appendix elements
+  $('h1.appendix, h2.appendix').each(function(i, val) {
+    $(this).changeElementType('h3');
+  });
+  $('h3.appendix').each(function(i, val) {
+    $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+  });
+
+
+  // inject headers into references and footnotes
+  var refs_header = $('<h3></h3>');
+  refs_header.text('References');
+  $('#refs').prepend(refs_header);
+
+  var footnotes_header = $('<h3></h3');
+  footnotes_header.text('Footnotes');
+  $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+  // move appendix-bottom entries to the bottom
+  $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+  $('.appendix-bottom').remove();
+
+  // remove appendix if it's empty
+  if ($('.d-appendix').children().length === 0)
+    $('.d-appendix').remove();
+
+  // prepend separator above appendix
+  $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+  // trim code
+  $('pre>code').each(function(i, val) {
+    $(this).html($.trim($(this).html()));
+  });
+
+  // move posts-container right before article
+  $('.posts-container').insertBefore($('.d-article'));
+
+  $('body').addClass('downlevel');
+
+  on_load_complete();
+}
+
+
+function init_common() {
+
+  // jquery plugin to change element types
+  (function($) {
+    $.fn.changeElementType = function(newType) {
+      var attrs = {};
+
+      $.each(this[0].attributes, function(idx, attr) {
+        attrs[attr.nodeName] = attr.nodeValue;
+      });
+
+      this.replaceWith(function() {
+        return $("<" + newType + "/>", attrs).append($(this).contents());
+      });
+    };
+  })(jQuery);
+
+  // prevent underline for linked images
+  $('a > img').parent().css({'border-bottom' : 'none'});
+
+  // mark non-body figures created by knitr chunks as 100% width
+  $('.layout-chunk').each(function(i, val) {
+    var figures = $(this).find('img, .html-widget');
+    if ($(this).attr('data-layout') !== "l-body") {
+      figures.css('width', '100%');
+    } else {
+      figures.css('max-width', '100%');
+      figures.filter("[width]").each(function(i, val) {
+        var fig = $(this);
+        fig.css('width', fig.attr('width') + 'px');
+      });
+
+    }
+  });
+
+  // auto-append index.html to post-preview links in file: protocol
+  // and in rstudio ide preview
+  $('.post-preview').each(function(i, val) {
+    if (window.location.protocol === "file:")
+      $(this).attr('href', $(this).attr('href') + "index.html");
+  });
+
+  // get rid of index.html references in header
+  if (window.location.protocol !== "file:") {
+    $('.distill-site-header a[href]').each(function(i,val) {
+      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+    });
+  }
+
+  // add class to pandoc style tables
+  $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+  $('.kable-table').children('table').addClass('pandoc-table');
+
+  // add figcaption style to table captions
+  $('caption').parent('table').addClass("figcaption");
+
+  // initialize posts list
+  if (window.init_posts_list)
+    window.init_posts_list();
+
+  // implmement disqus comment link
+  $('.disqus-comment-count').click(function() {
+    window.headroom_prevent_pin = true;
+    $('#disqus_thread').toggleClass('hidden');
+    if (!$('#disqus_thread').hasClass('hidden')) {
+      var offset = $(this).offset();
+      $(window).resize();
+      $('html, body').animate({
+        scrollTop: offset.top - 35
+      });
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (is_downlevel_browser())
+    init_downlevel();
+  else
+    window.addEventListener('WebComponentsReady', init_distill);
+});
+
+</script>
+
+<style type="text/css">
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    sans-serif;
+  --mono-font:       monospace;
+  --body-font:       sans-serif;
+  --navbar-font:     sans-serif;  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+</style>
+<style type="text/css">/* atma-regular - latin */
+  @font-face {
+    font-family: 'Atma';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/atma-v6-latin-regular.eot'); /* IE9 Compat Modes */
+      src: local(''),
+    url('../fonts/atma-v6-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+      url('../fonts/atma-v6-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+      url('../fonts/atma-v6-latin-regular.woff') format('woff'), /* Modern Browsers */
+      url('../fonts/atma-v6-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+      url('../fonts/atma-v6-latin-regular.svg#Atma') format('svg'); /* Legacy iOS */
+  }
+/* atma-600 - latin */
+  @font-face {
+    font-family: 'Atma';
+    font-style: normal;
+    font-weight: 600;
+    src: url('../fonts/atma-v6-latin-600.eot'); /* IE9 Compat Modes */
+      src: local(''),
+    url('../fonts/atma-v6-latin-600.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+      url('../fonts/atma-v6-latin-600.woff2') format('woff2'), /* Super Modern Browsers */
+      url('../fonts/atma-v6-latin-600.woff') format('woff'), /* Modern Browsers */
+      url('../fonts/atma-v6-latin-600.ttf') format('truetype'), /* Safari, Android, iOS */
+      url('../fonts/atma-v6-latin-600.svg#Atma') format('svg'); /* Legacy iOS */
+  }
+
+/* base variables */
+  
+  /* Edit the CSS properties in this file to create a custom
+Distill theme. Only edit values in the right column
+for each row; values shown are the CSS defaults.
+To return any property to the default,
+you may set its value to: unset
+All rows must end with a semi-colon.                      */
+  
+  /* Optional: embed custom fonts here with `@import`          */
+  /* This must remain at the top of this file.                 */
+  
+  
+  
+  html {
+    /*-- Main font sizes --*/
+    --title-size:      50px;
+    --body-size:       1.06rem;
+    --code-size:       14px;
+    --aside-size:      12px;
+    --fig-cap-size:    13px;
+    /*-- Main font colors --*/
+    --title-color:     white;
+    --header-color:    rgba(0, 0, 0, 0.8);
+    --body-color:      rgba(0, 0, 0, 0.8);
+    --aside-color:     rgba(0, 0, 0, 0.6);
+    --fig-cap-color:   rgba(0, 0, 0, 0.6);
+    /*-- Specify custom fonts ~~~ must be imported above   --*/
+      --heading-font:    Atma;
+    --mono-font:       monospace;
+    --body-font:       sans-serif;
+    --navbar-font:     Atma;  /* websites + blogs only */
+  }
+
+/*-- ARTICLE METADATA --*/
+  d-byline {
+    --heading-size:    0.6rem;
+    --heading-color:   rgba(173, 0, 89, 0.5);
+    --body-size:       0.8rem;
+    --body-color:      rgba(173, 0, 89, 0.8);
+  }
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+  .d-contents {
+    --heading-size:    18px;
+    --contents-size:   13px;
+  }
+
+/*-- ARTICLE APPENDIX --*/
+  d-appendix {
+    --heading-size:    15px;
+    --heading-color:   rgba(0, 0, 0, 0.65);
+    --text-size:       0.8em;
+    --text-color:      rgba(0, 0, 0, 0.5);
+  }
+
+/*-- WEBSITE HEADER + FOOTER --*/
+  /* These properties only apply to Distill sites and blogs  */
+  
+  .distill-site-header {
+    --title-size:       18px;
+    --text-color:       #6A3FAD;
+    --text-size:        15px;
+    --hover-color:      black;
+    --bkgd-color:       white;
+  }
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      rgba(0, 0, 0, 1);
+  --bkgd-color:       #6A3FAD;
+}
+
+/*-- Additional custom styles --*/
+  /* Add any additional CSS rules below                      */
+  
+  nav {
+    border-bottom: 2px solid rgba(222, 222, 222, 0.3);
+  }
+
+
+.distill-site-header .title {
+  min-width: 0px;
+}
+/*原主题颜色: rgba(106, 63, 173, 1)*/
+/*原主题颜色: #6A3FAD  */
+/*现主题颜色: #6A3FAD */
+
+/*更换步骤: 1: rgba(106, 63, 173, 1)  ➡  rgba(106, 63, 173, 1)*/
+/*更换步骤: 2: #6A3FAD  ➡  #6A3FAD */
+d-title {
+  background-color: rgba(106, 63, 173, 1);
+  color: white;
+}
+
+.posts-list > h1 {
+  color: black!important;
+}
+
+d-title a {
+  color: white;
+}
+
+d-byline {
+  background-color: #f6e5ee;
+}
+
+d-appendix {
+  background-color: #F8F8F8;
+}
+
+d-appendix .citation-appendix {
+  color: black;
+}
+
+.distill-site-footer {
+  margin-top: 0;
+}
+
+@media print {
+  d-byline {
+    --heading-color:   rgba(0, 0, 0, 0.5);
+    --body-color:      rgba(0, 0, 0, 0.8);
+  }
+  d-title {
+    --title-color: rgba(0, 0, 0, 1);
+    color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+/*  category tag color  */ 
+  .dt-tags .dt-tag {
+    color: rgba(255, 255, 255, 0.6);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+/*  code color highlights and bg */ 
+  d-article div.sourceCode pre {
+    border-left: 2px solid rgba(121,0,62,0.1);
+    background-color: #fff5f6!important;
+      padding-top: 10px;
+    padding-bottom: 10px;
+    overflow-x: auto!important;
+  }
+
+/* scroll bar color */
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: rgba(173, 0, 89, 0.8); 
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+/* end scroll bar color */
+  
+  d-article pre {
+    background-color: #e3e3e3;
+      padding: 10px;
+  }
+
+code span.fu, code span.kw {
+  color: #6A3FAD;
+}
+
+div.sourceCode {
+  margin: 0;
+}
+
+pre, d-article pre {
+  margin: 0;
+}</style>
+<style type="text/css">
+/* base style */
+
+/* FONT FAMILIES */
+
+:root {
+  --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+body,
+.posts-list .post-preview p,
+.posts-list .description p {
+  font-family: var(--body-font), var(--body-default);
+}
+
+h1, h2, h3, h4, h5, h6,
+.posts-list .post-preview h2,
+.posts-list .description h2 {
+  font-family: var(--heading-font), var(--heading-default);
+}
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: var(--mono-font), var(--mono-default);
+}
+
+
+/*-- TITLE --*/
+d-title h1,
+.posts-list > h1 {
+  color: var(--title-color, black);
+}
+
+d-title h1 {
+  font-size: var(--title-size, 50px);
+}
+
+/*-- HEADERS --*/
+d-article h1,
+d-article h2,
+d-article h3,
+d-article h4,
+d-article h5,
+d-article h6 {
+  color: var(--header-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- BODY --*/
+d-article > p,  /* only text inside of <p> tags */
+d-article > ul, /* lists */
+d-article > ol {
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+  font-size: var(--body-size, 1.06rem);
+}
+
+
+/*-- CODE --*/
+d-article div.sourceCode code,
+d-article pre code {
+  font-size: var(--code-size, 14px);
+}
+
+/*-- ASIDE --*/
+d-article aside {
+  font-size: var(--aside-size, 12px);
+  color: var(--aside-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- FIGURE CAPTIONS --*/
+figure .caption,
+figure figcaption,
+.figure .caption {
+  font-size: var(--fig-cap-size, 13px);
+  color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- METADATA --*/
+d-byline h3 {
+  font-size: var(--heading-size, 0.6rem);
+  color: var(--heading-color, rgba(0, 0, 0, 0.5));
+}
+
+d-byline {
+  font-size: var(--body-size, 0.8rem);
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+d-byline a,
+d-article d-byline a {
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- TABLE OF CONTENTS --*/
+.d-contents nav h3 {
+  font-size: var(--heading-size, 18px);
+}
+
+.d-contents nav a {
+  font-size: var(--contents-size, 13px);
+}
+
+/*-- APPENDIX --*/
+d-appendix h3 {
+  font-size: var(--heading-size, 15px);
+  color: var(--heading-color, rgba(0, 0, 0, 0.65));
+}
+
+d-appendix {
+  font-size: var(--text-size, 0.8em);
+  color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+d-appendix d-footnote-list a.footnote-backlink {
+  color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+.distill-site-header .title {
+  font-size: var(--title-size, 18px);
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a,
+.nav-dropdown .nav-dropbtn {
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.nav-dropdown .nav-dropbtn {
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  font-size: var(--text-size, 15px);
+}
+
+.distill-site-header a:hover,
+.nav-dropdown:hover .nav-dropbtn {
+  color: var(--hover-color, white);
+}
+
+.distill-site-header {
+  font-size: var(--text-size, 15px);
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer {
+  font-size: var(--text-size, 15px);
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer a:hover {
+  color: var(--hover-color, white);
+}</style>
+<!--/radix_placeholder_distill-->
+  <script src="../../site_libs/header-attrs-2.6.6/header-attrs.js"></script>
+  <script src="../../site_libs/kePrint-0.0.1/kePrint.js"></script>
+  <link href="../../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+  <script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+  <script src="../../site_libs/popper-2.6.0/popper.min.js"></script>
+  <link href="../../site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="../../site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="../../site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="../../site_libs/anchor-4.2.2/anchor.min.js"></script>
+  <script src="../../site_libs/bowser-1.9.3/bowser.min.js"></script>
+  <script src="../../site_libs/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="../../site_libs/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+<script type="text/javascript" cookie-consent="tracking" async src="https://www.googletagmanager.com/gtag/js?id=UA-77195073-2"></script>
+<script type="text/javascript" cookie-consent="tracking">
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'UA-77195073-2');
+</script>
+<!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Current state of R packages for the design of experiments","description":"Your analytical toolkit matters very little if the data are no good. Ideally you want to know to how the data were collected before delving into the analysis of the data; better yet, get involved _before_ the collection of data and design its collection. In this post I explore some of the top downloaded R packages for the design of experiments and analysis of experimental data.","authors":[{"author":"Jixing Liu","authorURL":"https://emitanaka.org","affiliation":"Monash University","affiliationURL":"https://numbat.space/","orcidID":""}],"publishedDate":"2021-02-03T00:00:00.000+00:00","citationText":"Liu, 2021"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a class="logo" href="https://jixing.org/">
+<img src="../../images/avatar.png" alt="Logo"/>
+</a>
+<a href="../../index.html" class="title">Jixing Liu</a>
+<a href="../../index.html">Home</a>
+<a href="../../blog.html">Post</a>
+<a href="../../resources.html">Resources</a>
+<a href="../../about.html">About</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="https://github.com/jixing475">
+<i class="fab fa-github" aria-hidden="true"></i>
+</a>
+<a href="https://twitter.com/statsgen">
+<i class="fab fa-twitter" aria-hidden="true"></i>
+</a>
+<a href="../../blog.xml">
+<i class="fa fa-rss" aria-hidden="true"></i>
+</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Current state of R packages for the design of experiments</h1>
+<!--radix_placeholder_categories-->
+<div class="dt-tags">
+  <a href="../../blog.html#category:experimental_design" class="dt-tag">experimental design</a>
+  <a href="../../blog.html#category:R" class="dt-tag">R</a>
+</div>
+<!--/radix_placeholder_categories-->
+<p><p>Your analytical toolkit matters very little if the data are no good. Ideally you want to know to how the data were collected before delving into the analysis of the data; better yet, get involved <em>before</em> the collection of data and design its collection. In this post I explore some of the top downloaded R packages for the design of experiments and analysis of experimental data.</p></p>
+</div>
+
+<div class="d-byline">
+  Jixing Liu <a href="https://emitanaka.org" class="uri">https://emitanaka.org</a> (Monash University)<a href="https://numbat.space/" class="uri">https://numbat.space/</a>
+  
+<br/>2021-02-03
+</div>
+
+<div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#data-collection">Data collection</a>
+<ul>
+<li><a href="#experimental-data">Experimental data</a></li>
+</ul></li>
+<li><a href="#design-and-analysis-of-experiments">Design and analysis of experiments</a>
+<ul>
+<li><a href="#bigram-of-doe-package-titles-and-descriptions">Bigram of DoE package titles and descriptions</a></li>
+<li><a href="#network-of-doe-package-imports-and-dependencies">Network of DoE package imports and dependencies</a></li>
+<li><a href="#cran-download-logs">CRAN download logs</a></li>
+<li><a href="#top-5-doe-packages">Top 5 DoE packages</a></li>
+</ul></li>
+<li><a href="#r-packages">R-packages</a>
+<ul>
+<li><a href="#algdesign"><code>AlgDesign</code></a></li>
+<li><a href="#agricolae"><code>agricolae</code></a></li>
+<li><a href="#lhs"><code>lhs</code></a></li>
+<li><a href="#ez"><code>ez</code></a></li>
+<li><a href="#doe.base"><code>DoE.base</code></a></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<style type="text/css">
+.toggle-code {
+  display: none;
+}
+
+button {
+  border-radius: 10px;
+  color: var(--aside-color, rgba(0, 0, 0, 0.6));
+  border-color: var(--aside-color, rgba(0, 0, 0, 0.6));
+}
+
+.scroll-output {
+  height: 200px;
+  overflow-y: scroll!important;
+}
+</style>
+</div>
+</div>
+<aside>
+<p>
+<button onclick="showscript()">
+Click Me
+</button>
+to see all code in this article. You can also find the link to the source Rmd file at the footer.
+</p>
+</aside>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://rvest.tidyverse.org/'>rvest</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://lubridate.tidyverse.org'>lubridate</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/r-hub/cranlogs'>cranlogs</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidyverse/glue'>glue</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://scales.r-lib.org'>scales</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://colorspace.R-Forge.R-project.org'>colorspace</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/juliasilge/tidytext'>tidytext</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://gitlab.com/hrbrmstr/pluralize'>pluralize</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://haozhu233.github.io/kableExtra/'>kableExtra</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://igraph.org'>igraph</a></span><span class='op'>)</span>
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggraph.data-imaginist.com'>ggraph</a></span><span class='op'>)</span>
+
+<span class='va'>myggtheme</span> <span class='op'>&lt;-</span> 
+  <span class='fu'>theme</span><span class='op'>(</span>panel.background <span class='op'>=</span> <span class='fu'>element_rect</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span>,
+        panel.grid <span class='op'>=</span> <span class='fu'>element_line</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#f6e5ee"</span><span class='op'>)</span>,
+        axis.text <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span><span class='op'>)</span>,
+        axis.line <span class='op'>=</span> <span class='fu'>element_line</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span>, size <span class='op'>=</span> <span class='fl'>0.7</span><span class='op'>)</span>,
+        axis.ticks.length <span class='op'>=</span> <span class='fu'>unit</span><span class='op'>(</span><span class='fl'>1.4</span>, <span class='st'>"mm"</span><span class='op'>)</span>,
+        axis.ticks <span class='op'>=</span> <span class='fu'>element_line</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span>, size <span class='op'>=</span> <span class='fl'>0.7</span><span class='op'>)</span>,
+        axis.title <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span>, face <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span>,
+        strip.background <span class='op'>=</span> <span class='fu'>element_rect</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span>,
+                                        fill <span class='op'>=</span> <span class='st'>"#6A3FAD"</span><span class='op'>)</span>,
+        strip.text <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"white"</span><span class='op'>)</span>,
+        plot.title.position <span class='op'>=</span> <span class='st'>"plot"</span>,
+        plot.title <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span>, face <span class='op'>=</span> <span class='st'>"bold"</span><span class='op'>)</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Thanks to Dirk Eddelbuettel's answer on SO:</span>
+<span class='co'># https://stackoverflow.com/questions/11560865/list-and-description-of-all-packages-in-cran-from-within-r</span>
+<span class='va'>url</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/options.html'>getOption</a></span><span class='op'>(</span><span class='st'>"repos"</span><span class='op'>)</span><span class='op'>[</span><span class='st'>"CRAN"</span><span class='op'>]</span>, <span class='st'>"web/packages/packages.rds"</span><span class='op'>)</span>
+<span class='va'>db</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/readRDS.html'>readRDS</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/connections.html'>url</a></span><span class='op'>(</span><span class='va'>url</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>nanalysis</span> <span class='op'>&lt;-</span> <span class='va'>db</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='va'>Title</span><span class='op'>)</span>, <span class='st'>"analysis"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='va'>ndesign</span> <span class='op'>&lt;-</span> <span class='va'>db</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/chartr.html'>tolower</a></span><span class='op'>(</span><span class='va'>Title</span><span class='op'>)</span>, <span class='st'>"design"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<h1 id="data-collection">Data collection</h1>
+<p>As many know, it doesn’t matter how good your analytical tools is if your data are rubbish. This sentiment is often captured in the expression “garbage in, garbage out”. It’s something we all seem to know but there is still a tendency for many of us to place a greater focus on the analysis<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. This is perhaps all natural given that a potential for discovery is just so much more exciting than ensuring the quality of the collected data.</p>
+<p>So what is considered as good quality data? A lack of error in the data? Data containing enough range of variables and sample size for the downstream analysis? Giving an explicit definition of a good quality data is a fraught exercise, but if you <strong>know how the data were collected</strong> then you can better perform the <em>initial data analysis</em> <span class="citation" data-cites="Chatfield1985-yz">(Chatfield <a href="#ref-Chatfield1985-yz" role="doc-biblioref">1985</a>)</span> to weed out (or fix) potential poor quality data. This step will likely get more value out of the data than fitting complex models to poor quality data.</p>
+<p>Better than knowing how the data were collected, if you can <em>design the collection of data</em> so that it’s optimised for the purpose of the analysis<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, then you can potentially get even a better value out of your data. Not all data collection starts with an explicit analytical plan though. Furthermore, you may have very little control of how the data are collected. Often these are <em>observational data</em> or making a secondary use of <em>experimental data</em>. This article will focus on data collection of an experiment where you have some control of the collection process.</p>
+<h2 id="experimental-data">Experimental data</h2>
+<p>All experiments are conducted with some objective in mind. This could be that a scientist may wish to test their hypothesis, a manufacturer wants to know which manufacturing process is better or a researcher wants to understand some cause-and-effect relationships. A characteristic part of an experiment is that the experimenter has control over some explanatory variables. In a <em>comparative experiment</em>, the control is over the allocation of treatments to subjects. Designing an experiment in the statistics discipline usually focus on this allocation, although it’s important to keep in mind that there are other decision factors in an experiment.</p>
+<p>Data that are collected from experiments are what we refer to as <em>experimental data</em>. Because it was collected with some objective in mind followed by some data collection plan, experimental data are often thought of to be better quality than observational data. But then again if you can’t quantify the quality of data, you can’t really tell. Certain scientific claims (e.g. causation, better treatment) can only be substantiated by experiments and so experimental data is held to a higher standard in general.</p>
+<h1 id="design-and-analysis-of-experiments">Design and analysis of experiments</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>dat_DoE</span> <span class='op'>&lt;-</span> <span class='fu'>read_html</span><span class='op'>(</span><span class='st'>"https://cran.r-project.org/web/views/ExperimentalDesign.html"</span><span class='op'>)</span>
+<span class='va'>date_download</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='va'>cran_names</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/available.packages.html'>available.packages</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='op'>)</span> <span class='co'># it should be unique</span>
+<span class='va'>doe_pkgs</span> <span class='op'>&lt;-</span> <span class='va'>dat_DoE</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rvest.tidyverse.org/reference/html_nodes.html'>html_nodes</a></span><span class='op'>(</span><span class='st'>"li"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rvest.tidyverse.org/reference/html_nodes.html'>html_nodes</a></span><span class='op'>(</span><span class='st'>"a"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rvest.tidyverse.org/reference/html_text.html'>html_text</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='va'>.</span><span class='op'>[</span><span class='va'>.</span> <span class='op'>%in%</span> <span class='va'>cran_names</span><span class='op'>]</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='va'>dat_survey</span> <span class='op'>&lt;-</span> <span class='fu'>read_html</span><span class='op'>(</span><span class='st'>"https://cran.r-project.org/web/views/OfficialStatistics.html"</span><span class='op'>)</span>
+<span class='va'>survey_pkgs</span> <span class='op'>&lt;-</span> <span class='va'>dat_survey</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rvest.tidyverse.org/reference/html_nodes.html'>html_nodes</a></span><span class='op'>(</span><span class='st'>"li"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rvest.tidyverse.org/reference/html_nodes.html'>html_nodes</a></span><span class='op'>(</span><span class='st'>"a"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rvest.tidyverse.org/reference/html_text.html'>html_text</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='va'>.</span><span class='op'>[</span><span class='va'>.</span> <span class='op'>%in%</span> <span class='va'>cran_names</span><span class='op'>]</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<p>There are all together 113 R-packages in the <a href="https://cran.r-project.org/web/views/ExperimentalDesign.html">CRAN Task View of Design of Experiments &amp; Analysis of Experimental Data</a> as of 2021-02-07.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> I’m going to refer these packages as <strong><em>DoE packages</em></strong>, although there are some packages in the mix that are more about the analysis of experimental data rather than the design of experiments and there are some packages that are missing in the list (e.g. <code>DeclareDesign</code>). The DoE packages make up about 0.7% of the 17,036 packages available in CRAN.</p>
+<p>The DoE packages don’t include survey design. These instead belong to the <a href="https://cran.r-project.org/web/views/OfficialStatistics.html">CRAN Task View of Official Statistics &amp; Survey Methodology</a> which contains 132 packages. While some surveys are part of an experimental study, most often they generate observational data.</p>
+<p>Below I have a number of different analysis for these DoE packages. If you push the button on the top right corner of this article, you can toggle the display for the code or alternatively you can have a look at the source Rmd document.</p>
+<h2 id="bigram-of-doe-package-titles-and-descriptions">Bigram of DoE package titles and descriptions</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>stop_words_ext</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>stop_words</span><span class='op'>$</span><span class='va'>word</span>, <span class='st'>"doi"</span><span class='op'>)</span>
+
+<span class='va'>doe_db</span> <span class='op'>&lt;-</span> <span class='va'>db</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>Package</span> <span class='op'>%in%</span> <span class='va'>doe_pkgs</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>Description <span class='op'>=</span> <span class='fu'>str_replace_all</span><span class='op'>(</span><span class='va'>Description</span>, <span class='st'>"\n"</span>, <span class='st'>" "</span><span class='op'>)</span>,
+         Description <span class='op'>=</span> <span class='fu'>str_squish</span><span class='op'>(</span><span class='va'>Description</span><span class='op'>)</span>,
+         Title <span class='op'>=</span> <span class='fu'>str_replace_all</span><span class='op'>(</span><span class='va'>Title</span>, <span class='st'>"\n"</span>, <span class='st'>" "</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>bigram_tab</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>data</span>, <span class='va'>col</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>data</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='https://rdrr.io/pkg/tidytext/man/unnest_tokens.html'>unnest_tokens</a></span><span class='op'>(</span><span class='va'>word</span>, <span class='op'>{</span><span class='op'>{</span><span class='va'>col</span><span class='op'>}</span><span class='op'>}</span>, token <span class='op'>=</span> <span class='st'>"ngrams"</span>, n <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>separate</span><span class='op'>(</span><span class='va'>word</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"word1"</span>, <span class='st'>"word2"</span><span class='op'>)</span>, sep <span class='op'>=</span> <span class='st'>" "</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>mutate</span><span class='op'>(</span>word1 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/pluralize/man/singularize.html'>singularize</a></span><span class='op'>(</span><span class='va'>word1</span><span class='op'>)</span>,
+           word2 <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/pkg/pluralize/man/singularize.html'>singularize</a></span><span class='op'>(</span><span class='va'>word2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='co'># don't count the same bigram within the same package</span>
+    <span class='fu'>distinct</span><span class='op'>(</span><span class='va'>Package</span>, <span class='va'>word1</span>, <span class='va'>word2</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='va'>word1</span> <span class='op'>%in%</span> <span class='va'>stop_words_ext</span>,
+           <span class='op'>!</span><span class='va'>word2</span> <span class='op'>%in%</span> <span class='va'>stop_words_ext</span>,
+           <span class='op'>!</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>word1</span>, <span class='st'>"^[0-9.]+$"</span><span class='op'>)</span>,
+           <span class='op'>!</span><span class='fu'>str_detect</span><span class='op'>(</span><span class='va'>word2</span>, <span class='st'>"^[0-9.]+$"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>count</span><span class='op'>(</span><span class='va'>word1</span>, <span class='va'>word2</span>, sort <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>  
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>bigram_tab</span><span class='op'>(</span><span class='va'>doe_db</span>, <span class='va'>Description</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>&gt;</span> <span class='fl'>4</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>word <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>word1</span>, <span class='va'>word2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>word</span>, <span class='va'>n</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"The bigram of the R-package _descriptions_ as provided in the DESCRIPTION file in CRAN."</span>, 
+               col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Bigram"</span>, <span class='st'>"Count"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_classic.html'>kable_classic</a></span><span class='op'>(</span>full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>bigram_tab</span><span class='op'>(</span><span class='va'>doe_db</span>, <span class='va'>Title</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>n</span> <span class='op'>&gt;</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>word <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>word1</span>, <span class='va'>word2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>word</span>, <span class='va'>n</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kbl.html'>kbl</a></span><span class='op'>(</span>caption <span class='op'>=</span> <span class='st'>"The bigram of the R-package _titles_ as provided in the DESCRIPTION file in CRAN."</span>, 
+               col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Bigram"</span>, <span class='st'>"Count"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/pkg/kableExtra/man/kable_classic.html'>kable_classic</a></span><span class='op'>(</span>full_width <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<p>Table <a href="#tab:bigram-title">1</a> shows the most common bigrams in the title of the DoE packages. It’s perhaps not surprising but the words “optimal design” and “experimental design” are the top. It’s also likely that the words “design of experiments” appears often but because this is a bigram (two consecutive words) so it doesn’t appear. You might then wonder if that’s the case words like “design of” or “of experiments” should make an appearance, however “of” is a stop word and these are filtered out otherwise unwanted bigrams come up on the top.</p>
+<p>There are couple of words like “clinical trial” and “dose finding” that suggests applications in medical experiments, as well as “microarray experiment” that suggests application in bioinformatics.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:bigram-title">Table 1: </span>The bigram of the R-package <em>titles</em> as provided in the DESCRIPTION file in CRAN.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Bigram
+</th>
+<th style="text-align:right;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+optimal design
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+experimental design
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+clinical trial
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+dose finding
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sequential design
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+block design
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+microarray experiment
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+response surface
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The title alone might be too succinct for text analysis so I also had a look at the most common bigrams in the description of the DoE packages as shown in Table <a href="#tab:bigram-desc">2</a>. The counts in Table <a href="#tab:bigram-desc">2</a> (and also Table <a href="#tab:bigram-title">1</a>) is across the DoE packages. To be more clear, even if the bigram is mentioned multiple times within the description, it’s only counted once per package. This removes the inflation of the counts due to one package mentioning the same bigram over and over again.</p>
+<p>Again not surprisingly “experimental design” and “optimal design” comes on top in the DoE package descriptions. The words “graphical user” and “user interface” implies that the trigram “graphical user interface” was probably common.</p>
+<div class="layout-chunk" data-layout="l-body">
+<table class=" lightable-classic" style="font-family: &quot;Arial Narrow&quot;, &quot;Source Sans Pro&quot;, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:bigram-desc">Table 2: </span>The bigram of the R-package <em>descriptions</em> as provided in the DESCRIPTION file in CRAN.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Bigram
+</th>
+<th style="text-align:right;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+experimental design
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+optimal design
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+package provide
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+response surface
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+factorial design
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+graphical user
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+user interface
+</td>
+<td style="text-align:right;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+block design
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+contour plot
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+design based
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+effect model
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+fractional factorial
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+microarray experiment
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+mixed effect
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+provide function
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sample size
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sequential design
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="network-of-doe-package-imports-and-dependencies">Network of DoE package imports and dependencies</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>doe_imports</span> <span class='op'>&lt;-</span> <span class='va'>doe_db</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>Depends <span class='op'>=</span> <span class='fu'>str_replace_all</span><span class='op'>(</span><span class='va'>Depends</span>, <span class='st'>"\n"</span>, <span class='st'>" "</span><span class='op'>)</span>,
+         Depends <span class='op'>=</span> <span class='fu'>str_replace_all</span><span class='op'>(</span><span class='va'>Depends</span>, <span class='fu'>fixed</span><span class='op'>(</span><span class='st'>"("</span><span class='op'>)</span>, <span class='st'>" ("</span><span class='op'>)</span>,
+         Imports <span class='op'>=</span> <span class='fu'>str_replace_all</span><span class='op'>(</span><span class='va'>Imports</span>, <span class='st'>"\n"</span>, <span class='st'>" "</span><span class='op'>)</span>,
+         Imports <span class='op'>=</span> <span class='fu'>str_replace_all</span><span class='op'>(</span><span class='va'>Imports</span>, <span class='fu'>fixed</span><span class='op'>(</span><span class='st'>"("</span><span class='op'>)</span>, <span class='st'>" ("</span><span class='op'>)</span>,
+         imports <span class='op'>=</span> <span class='fu'>str_c</span><span class='op'>(</span><span class='va'>Depends</span>, <span class='va'>Imports</span>, sep <span class='op'>=</span> <span class='st'>","</span><span class='op'>)</span>,
+         imports <span class='op'>=</span> <span class='fu'>str_split</span><span class='op'>(</span><span class='va'>imports</span>, <span class='st'>","</span><span class='op'>)</span>,
+         imports <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>imports</span>, <span class='op'>~</span><span class='op'>{</span>
+                    <span class='fu'>str_squish</span><span class='op'>(</span><span class='va'>.x</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+                      <span class='fu'>word</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+                      <span class='va'>.</span><span class='op'>[</span><span class='va'>.</span><span class='op'>!=</span><span class='st'>""</span><span class='op'>]</span><span class='op'>}</span>
+           <span class='op'>)</span>,
+         imports_doe <span class='op'>=</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>imports</span>, <span class='op'>~</span><span class='va'>.x</span><span class='op'>[</span><span class='va'>.x</span> <span class='op'>%in%</span> <span class='va'>doe_pkgs</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>Package</span>, <span class='va'>imports_doe</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>unnest_longer</span><span class='op'>(</span><span class='va'>imports_doe</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='op'>!</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>imports_doe</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>rename</span><span class='op'>(</span>from <span class='op'>=</span> <span class='va'>imports_doe</span>, to <span class='op'>=</span> <span class='va'>Package</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>select</span><span class='op'>(</span><span class='va'>from</span>, <span class='va'>to</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<p>Figure <a href="#fig:doe-network">1</a> shows the imports and dependency between the DoE packages. We can see here that <code>DoE.wrapper</code> imports a fair number of DoE packages that results in the major network cluster see in Figure <a href="#fig:doe-network">1</a>. <code>AlgDesign</code> and <code>DoE.base</code> are imported into four other DoE packages so form an important base in the DoE world.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/graph_from_data_frame.html'>graph_from_data_frame</a></span><span class='op'>(</span><span class='va'>doe_imports</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/ggraph.html'>ggraph</a></span><span class='op'>(</span>layout <span class='op'>=</span> <span class='st'>'fr'</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_edge_link.html'>geom_edge_link</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>start_cap <span class='op'>=</span> <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geometry.html'>label_rect</a></span><span class='op'>(</span><span class='va'>node1.name</span><span class='op'>)</span>,
+                     end_cap <span class='op'>=</span> <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geometry.html'>label_rect</a></span><span class='op'>(</span><span class='va'>node2.name</span><span class='op'>)</span><span class='op'>)</span>, 
+                 arrow <span class='op'>=</span> <span class='fu'>arrow</span><span class='op'>(</span>length <span class='op'>=</span> <span class='fu'>unit</span><span class='op'>(</span><span class='fl'>2</span>, <span class='st'>'mm'</span><span class='op'>)</span><span class='op'>)</span>,
+                 color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='https://ggraph.data-imaginist.com/reference/geom_node_text.html'>geom_node_text</a></span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>name</span><span class='op'>)</span>,
+                 color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>theme</span><span class='op'>(</span>panel.background <span class='op'>=</span> <span class='fu'>element_rect</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='st'>"#f6e5ee"</span>,
+                                        color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span><span class='op'>)</span>,
+        plot.margin <span class='op'>=</span> <span class='fu'>margin</span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>20</span>, <span class='fl'>20</span>, <span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:doe-network"></span>
+<img src="figures/doe-network-1.png" alt="The network of imports and dependency among DoE packages alone. Each node represents a DoE package. DoE packages with no imports or dependency on other DoE packages are excluded. Each arrow represents the relationship between the packages such that the package on the tail is used by package on the head of the arrow." width="960" />
+<p class="caption">
+Figure 1: The network of imports and dependency among DoE packages alone. Each node represents a DoE package. DoE packages with no imports or dependency on other DoE packages are excluded. Each arrow represents the relationship between the packages such that the package on the tail is used by package on the head of the arrow.
+</p>
+</div>
+</div>
+<h2 id="cran-download-logs">CRAN download logs</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>end</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>-</span> <span class='fl'>2</span> <span class='co'># usually 1-2 days are not available yet</span>
+<span class='va'>start</span> <span class='op'>&lt;-</span> <span class='va'>end</span> <span class='op'>-</span> <span class='fu'><a href='http://lubridate.tidyverse.org/reference/period.html'>years</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>)</span> <span class='op'>+</span> <span class='fu'><a href='http://lubridate.tidyverse.org/reference/period.html'>days</a></span><span class='op'>(</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>dldat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://r-hub.github.io/cranlogs/reference/cran_downloads.html'>cran_downloads</a></span><span class='op'>(</span><span class='va'>doe_pkgs</span>, from <span class='op'>=</span> <span class='va'>start</span>, to <span class='op'>=</span> <span class='va'>end</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>dldat</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>package</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+    <span class='fu'>summarise</span><span class='op'>(</span>total <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>count</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span><span class='va'>total</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>geom_histogram</span><span class='op'>(</span>color <span class='op'>=</span> <span class='st'>"white"</span>, fill <span class='op'>=</span> <span class='st'>"#6A3FAD"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>scale_x_log10</span><span class='op'>(</span>label <span class='op'>=</span> <span class='va'>comma</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='va'>myggtheme</span> <span class='op'>+</span> 
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"Total download counts from {start} to {end}"</span><span class='op'>)</span>,
+       y <span class='op'>=</span> <span class='st'>"Number of packages"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_y_continuous</span><span class='op'>(</span>expand <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<p>Figure <a href="#fig:download-hist">2</a> shows the distribution of the total download counts over the last 5 years<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> of the DoE packages. This graph doesn’t take into account that some DoE packages may only have been on CRAN in the last 5 years so the counts are in favour of DoE packages that’s been on CRAN longer.</p>
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:download-hist"></span>
+<img src="figures/download-hist-1.png" alt="Histogram of the total download count over last 5 years of the DoE packages." width="624" />
+<p class="caption">
+Figure 2: Histogram of the total download count over last 5 years of the DoE packages.
+</p>
+</div>
+</div>
+<h2 id="top-5-doe-packages">Top 5 DoE packages</h2>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>ntop</span> <span class='op'>&lt;-</span> <span class='fl'>5</span>
+
+<span class='va'>top5sum_df</span> <span class='op'>&lt;-</span> <span class='va'>dldat</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>package</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>summarise</span><span class='op'>(</span>total <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>count</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ungroup</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>slice_max</span><span class='op'>(</span>order_by <span class='op'>=</span> <span class='va'>total</span>, n <span class='op'>=</span> <span class='va'>ntop</span><span class='op'>)</span>
+
+<span class='va'>top5</span> <span class='op'>&lt;-</span> <span class='va'>top5sum_df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>pull</span><span class='op'>(</span><span class='va'>package</span><span class='op'>)</span> 
+
+<span class='va'>top5_df</span> <span class='op'>&lt;-</span> <span class='va'>dldat</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>package</span> <span class='op'>%in%</span> <span class='va'>top5</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>package <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>package</span>, <span class='va'>count</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span> <span class='op'>-</span><span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</div>
+</div>
+<p>The top 5 downloaded DoE packages at the time of this writing are <code>AlgDesign</code>, <code>agricolae</code>, <code>lhs</code>, <code>ez</code>, and <code>DoE.base</code>. You can see the download counts in Figure <a href="#fig:download-barplot">3</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>top5sum_df</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>mutate</span><span class='op'>(</span>package <span class='op'>=</span> <span class='fu'>fct_reorder</span><span class='op'>(</span><span class='va'>package</span>, <span class='va'>total</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>ggplot</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span><span class='va'>total</span>, <span class='va'>package</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>geom_col</span><span class='op'>(</span><span class='fu'>aes</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='va'>package</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"Total downloads from {start} to {end}"</span><span class='op'>)</span>,
+       y <span class='op'>=</span> <span class='st'>"Package"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>scale_x_continuous</span><span class='op'>(</span>labels <span class='op'>=</span> <span class='va'>comma</span>, expand <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='va'>myggtheme</span> <span class='op'>+</span> 
+  <span class='fu'><a href='http://colorspace.R-Forge.R-project.org//reference/scale_colour_discrete_qualitative.html'>scale_fill_discrete_qualitative</a></span><span class='op'>(</span>rev <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>guides</span><span class='op'>(</span>fill <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:download-barplot"></span>
+<img src="figures/download-barplot-1.png" alt="The above barplot shows the total downloads of the top 5 downloaded DoE packages from the period 2016-02-07 to 2021-02-05." width="624" />
+<p class="caption">
+Figure 3: The above barplot shows the total downloads of the top 5 downloaded DoE packages from the period 2016-02-07 to 2021-02-05.
+</p>
+</div>
+</div>
+<p>We can have a look at further examination of the top 5 DoE packages by looking at the daily download counts as shown in Figure <a href="#fig:download-barplot">3</a>. The download counts are the raw values and these include downloads by CRAN mirror and bots. There is a noticeable spike when there is an update to the CRAN package. This is partly because when there is a new version of the package, when you install other packages that depend or import it then R will prompt you to install the new version. This means that the download counts are inflated and to some extent you can artificially boost them by making regular CRAN updates. The <code>adjustedcranlogs</code> <span class="citation" data-cites="adjustedcranlogs">(Morgan-Wall <a href="#ref-adjustedcranlogs" role="doc-biblioref">2017</a>)</span> makes a nice attempt to adjust the raw counts based on a certain heuristic. I didn’t use it since the adjustment is stochastic and I <a href="https://github.com/tylermorganwall/adjustedcranlogs/issues/6">appear to have hit a bug</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>pkg_url</span> <span class='op'>&lt;-</span> <span class='st'>"https://cran.r-project.org/web/packages/{pkg}/index.html"</span>
+<span class='va'>pkg_archive</span> <span class='op'>&lt;-</span> <span class='st'>"https://cran.r-project.org/src/contrib/Archive/{pkg}/"</span>
+<span class='va'>pkg_updates</span> <span class='op'>&lt;-</span> <span class='fu'>map</span><span class='op'>(</span><span class='va'>top5</span>, <span class='kw'>function</span><span class='op'>(</span><span class='va'>pkg</span><span class='op'>)</span> <span class='op'>{</span>
+    <span class='va'>last_update</span> <span class='op'>&lt;-</span> <span class='fu'>read_html</span><span class='op'>(</span><span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='va'>pkg_url</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='https://rvest.tidyverse.org/reference/html_table.html'>html_table</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='va'>.</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>X1</span><span class='op'>==</span><span class='st'>"Published:"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'>pull</span><span class='op'>(</span><span class='va'>X2</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+      <span class='fu'><a href='http://lubridate.tidyverse.org/reference/ymd.html'>ymd</a></span><span class='op'>(</span><span class='op'>)</span>
+      
+    <span class='va'>archive_dates</span> <span class='op'>&lt;-</span> <span class='kw'><a href='https://rdrr.io/r/base/conditions.html'>tryCatch</a></span><span class='op'>(</span><span class='op'>{</span> 
+        <span class='fu'>read_html</span><span class='op'>(</span><span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='va'>pkg_archive</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+          <span class='fu'><a href='https://rvest.tidyverse.org/reference/html_table.html'>html_table</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+          <span class='va'>.</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span> <span class='op'>%&gt;%</span> 
+          <span class='fu'>pull</span><span class='op'>(</span><span class='va'>`Last modified`</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+          <span class='fu'><a href='http://lubridate.tidyverse.org/reference/ymd_hms.html'>ymd_hm</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+          <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+          <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='op'>)</span>
+      <span class='op'>}</span>, error <span class='op'>=</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>e</span><span class='op'>)</span> <span class='op'>{</span>
+        <span class='cn'>NULL</span>
+      <span class='op'>}</span><span class='op'>)</span>
+    <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>archive_dates</span>, <span class='va'>last_update</span><span class='op'>)</span>
+  <span class='op'>}</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='va'>pkg_updates</span><span class='op'>)</span> <span class='op'>&lt;-</span> <span class='va'>top5</span>
+
+<span class='va'>updates</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/unlist.html'>unlist</a></span><span class='op'>(</span><span class='va'>pkg_updates</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>enframe</span><span class='op'>(</span><span class='st'>"package"</span>, <span class='st'>"update"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='co'># unlist converts date to integers</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>update <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/as.Date.html'>as.Date</a></span><span class='op'>(</span><span class='va'>update</span>, origin <span class='op'>=</span> <span class='st'>"1970-01-01"</span><span class='op'>)</span>,
+         <span class='co'># need to get rid of the numbers appended to pkg names</span>
+         package <span class='op'>=</span> <span class='fu'>str_extract</span><span class='op'>(</span><span class='va'>package</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>top5</span>, collapse<span class='op'>=</span><span class='st'>"|"</span><span class='op'>)</span><span class='op'>)</span>,
+         package <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>package</span>, levels <span class='op'>=</span> <span class='va'>top5</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='fu'>between</span><span class='op'>(</span><span class='va'>update</span>, <span class='va'>start</span>, <span class='va'>end</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="toggle-code">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>top5_df</span>, <span class='fu'>aes</span><span class='op'>(</span><span class='va'>date</span>, <span class='va'>count</span>, color <span class='op'>=</span> <span class='va'>package</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='co'># add shadow lines</span>
+  <span class='fu'>geom_line</span><span class='op'>(</span>data <span class='op'>=</span> <span class='fu'>rename</span><span class='op'>(</span><span class='va'>top5_df</span>, package2 <span class='op'>=</span> <span class='va'>package</span><span class='op'>)</span>, 
+            color <span class='op'>=</span> <span class='st'>"gray"</span>, <span class='fu'>aes</span><span class='op'>(</span>group <span class='op'>=</span> <span class='va'>package2</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='co'># add date when package was updated</span>
+  <span class='fu'>geom_vline</span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>updates</span>, <span class='fu'>aes</span><span class='op'>(</span>xintercept <span class='op'>=</span> <span class='va'>update</span><span class='op'>)</span>,
+             linetype <span class='op'>=</span> <span class='st'>"dashed"</span>, color <span class='op'>=</span> <span class='st'>"#6A3FAD"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='co'># the trend line</span>
+  <span class='fu'>geom_line</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>scale_y_log10</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>facet_grid</span><span class='op'>(</span><span class='va'>package</span> <span class='op'>~</span> <span class='va'>.</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='fu'><a href='https://glue.tidyverse.org/reference/glue.html'>glue</a></span><span class='op'>(</span><span class='st'>"Top 5 downloaded DoE packages from {start} to {end}"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'><a href='http://colorspace.R-Forge.R-project.org//reference/scale_colour_discrete_qualitative.html'>scale_color_discrete_qualitative</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>guides</span><span class='op'>(</span>color <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='va'>myggtheme</span>
+</code></pre>
+</div>
+</div>
+</div>
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="figure" style="text-align: center"><span id="fig:download-timeplot"></span>
+<img src="figures/download-timeplot-1.png" alt="The above plot shows the daily downloads of the top 5 downloaded DoE packages from the period 2016-02-07 to 2021-02-05. The vertical dotted bar corresponds to the date that a new version of the corresponding package was released on CRAN." width="624" data-distill-preview=1 />
+<p class="caption">
+Figure 4: The above plot shows the daily downloads of the top 5 downloaded DoE packages from the period 2016-02-07 to 2021-02-05. The vertical dotted bar corresponds to the date that a new version of the corresponding package was released on CRAN.
+</p>
+</div>
+</div>
+<h1 id="r-packages">R-packages</h1>
+<p>Here we have a closer look at the functions of the top 5 downloaded DoE packages below ordered by their download counts.</p>
+<ol type="1">
+<li><strong><code>AlgDesign</code></strong> <a href="https://cran.r-project.org/web/packages/AlgDesign/index.html"><i class="fab fa-r-project"></i> CRAN</a> <a href="https://github.com/jvbraun/AlgDesign"><i class="fab fa-github"></i> GitHub</a> <i class="fas fa-book"></i> <span class="citation" data-cites="AlgDesign">Wheeler (<a href="#ref-AlgDesign" role="doc-biblioref">2019</a>)</span><br />
+<em>Algorithmic Experimental Design</em><br />
+Originally written by <i class="fas fa-user"></i> Bob Wheeler but <i class="fas fa-user"></i> Jerome Braun have taken over maintenance of the package.</li>
+<li><strong><code>agricolae</code></strong> <a href="https://cran.r-project.org/web/packages/agricolae/index.html"><i class="fab fa-r-project"></i> CRAN</a> <i class="fas fa-book"></i> <span class="citation" data-cites="agricolae">de Mendiburu (<a href="#ref-agricolae" role="doc-biblioref">2020</a>)</span><br />
+<em>Statistical Procedures for Agricultural Research</em><br />
+Written and maintained by <i class="fas fa-user"></i> Felipe de Mendiburu</li>
+<li><strong><code>lhs</code></strong> <a href="https://cran.r-project.org/web/packages/lhs/index.html"><i class="fab fa-r-project"></i> CRAN</a> <a href="https://github.com/bertcarnell/lhs"><i class="fab fa-github"></i> GitHub</a> <i class="fas fa-book"></i> <span class="citation" data-cites="lhs">Carnell (<a href="#ref-lhs" role="doc-biblioref">2020</a>)</span><br />
+<em>Latin Hypercube Samples</em><br />
+Written and maintained by <i class="fas fa-user"></i> Rob Carnell</li>
+<li><strong><code>ez</code></strong> <a href="https://cran.r-project.org/web/packages/ez/index.html"><i class="fab fa-r-project"></i> CRAN</a> <a href="https://github.com/mike-lawrence/ez"><i class="fab fa-github"></i> GitHub</a> <i class="fas fa-book"></i> <span class="citation" data-cites="ez">Lawrence (<a href="#ref-ez" role="doc-biblioref">2016</a>)</span><br />
+<em>Easy Analysis and Visualization of Factorial Experiments</em><br />
+Written and maintained by <i class="fas fa-user"></i> Michael A. Lawrence</li>
+<li><strong><code>DoE.base</code></strong> <a href="https://cran.r-project.org/web/packages/DoE.base/index.html"><i class="fab fa-r-project"></i> CRAN</a> <i class="fas fa-book"></i> <span class="citation" data-cites="DoE.base">Grömping (<a href="#ref-DoE.base" role="doc-biblioref">2018</a>)</span><br />
+<em>Full Factorials, Orthogonal Arrays and Base Utilities for DoE Packages</em><br />
+Written and maintained by <i class="fas fa-user"></i> Ulrike Groemping.</li>
+</ol>
+<aside>
+Interestingly these top 5 DoE packages have only <em>one active author</em>. Bob Wheeler doesn’t seem to actively contribute to <code>AlgDesign</code> any longer; and there are two contributors for <code>DoE.base</code> but are not listed as authors.
+</aside>
+<p>Before we look at the packages, let’s set a seed so we can reproduce the results.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>2021</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h2 id="algdesign"><code>AlgDesign</code></h2>
+<p>To start off, we begin with the most downloaded DoE package, <code>AlgDesign</code>. The examples below are taken directly from the <a href="https://cran.r-project.org/web/packages/AlgDesign/vignettes/AlgDesign.pdf">vignette of the <code>AlgDesign</code> package</a>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/jvbraun/AlgDesign'>AlgDesign</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>You can create a balanced incomplete block design using the <code>optBlock</code> function. It’s using an optimal design framework where the default criterion is D criterion and the implied model is given in the first argument.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>BIB</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/AlgDesign/man/blockOpt.html'>optBlock</a></span><span class='op'>(</span><span class='op'>~</span> <span class='va'>.</span>, 
+                withinData <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>)</span>, 
+                blocksize <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>3</span>, <span class='fl'>7</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>BIB</span>
+</code></pre>
+</div>
+<pre class="scroll-output"><code>$D
+[1] 0.08033556
+
+$diagonality
+[1] 0.692
+
+$Blocks
+$Blocks$B1
+  X1
+1  1
+3  3
+4  4
+
+$Blocks$B2
+  X1
+2  2
+4  4
+5  5
+
+$Blocks$B3
+  X1
+4  4
+6  6
+7  7
+
+$Blocks$B4
+  X1
+3  3
+5  5
+6  6
+
+$Blocks$B5
+  X1
+2  2
+3  3
+7  7
+
+$Blocks$B6
+  X1
+1  1
+2  2
+6  6
+
+$Blocks$B7
+  X1
+1  1
+5  5
+7  7
+
+
+$design
+   X1
+1   1
+3   3
+4   4
+2   2
+41  4
+5   5
+42  4
+6   6
+7   7
+31  3
+51  5
+61  6
+21  2
+32  3
+71  7
+11  1
+22  2
+62  6
+12  1
+52  5
+72  7
+
+$rows
+ [1] 1 3 4 2 4 5 4 6 7 3 5 6 2 3 7 1 2 6 1 5 7</code></pre>
+</div>
+<p><code>AlgDesign</code> also includes helper functions to generate a factorial structure.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'>gen.factorial</span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>7</span><span class='op'>)</span>
+<span class='va'>dat</span>
+</code></pre>
+</div>
+<pre class="scroll-output"><code>    X1 X2 X3 X4 X5 X6 X7
+1   -1 -1 -1 -1 -1 -1 -1
+2    1 -1 -1 -1 -1 -1 -1
+3   -1  1 -1 -1 -1 -1 -1
+4    1  1 -1 -1 -1 -1 -1
+5   -1 -1  1 -1 -1 -1 -1
+6    1 -1  1 -1 -1 -1 -1
+7   -1  1  1 -1 -1 -1 -1
+8    1  1  1 -1 -1 -1 -1
+9   -1 -1 -1  1 -1 -1 -1
+10   1 -1 -1  1 -1 -1 -1
+11  -1  1 -1  1 -1 -1 -1
+12   1  1 -1  1 -1 -1 -1
+13  -1 -1  1  1 -1 -1 -1
+14   1 -1  1  1 -1 -1 -1
+15  -1  1  1  1 -1 -1 -1
+16   1  1  1  1 -1 -1 -1
+17  -1 -1 -1 -1  1 -1 -1
+18   1 -1 -1 -1  1 -1 -1
+19  -1  1 -1 -1  1 -1 -1
+20   1  1 -1 -1  1 -1 -1
+21  -1 -1  1 -1  1 -1 -1
+22   1 -1  1 -1  1 -1 -1
+23  -1  1  1 -1  1 -1 -1
+24   1  1  1 -1  1 -1 -1
+25  -1 -1 -1  1  1 -1 -1
+26   1 -1 -1  1  1 -1 -1
+27  -1  1 -1  1  1 -1 -1
+28   1  1 -1  1  1 -1 -1
+29  -1 -1  1  1  1 -1 -1
+30   1 -1  1  1  1 -1 -1
+31  -1  1  1  1  1 -1 -1
+32   1  1  1  1  1 -1 -1
+33  -1 -1 -1 -1 -1  1 -1
+34   1 -1 -1 -1 -1  1 -1
+35  -1  1 -1 -1 -1  1 -1
+36   1  1 -1 -1 -1  1 -1
+37  -1 -1  1 -1 -1  1 -1
+38   1 -1  1 -1 -1  1 -1
+39  -1  1  1 -1 -1  1 -1
+40   1  1  1 -1 -1  1 -1
+41  -1 -1 -1  1 -1  1 -1
+42   1 -1 -1  1 -1  1 -1
+43  -1  1 -1  1 -1  1 -1
+44   1  1 -1  1 -1  1 -1
+45  -1 -1  1  1 -1  1 -1
+46   1 -1  1  1 -1  1 -1
+47  -1  1  1  1 -1  1 -1
+48   1  1  1  1 -1  1 -1
+49  -1 -1 -1 -1  1  1 -1
+50   1 -1 -1 -1  1  1 -1
+51  -1  1 -1 -1  1  1 -1
+52   1  1 -1 -1  1  1 -1
+53  -1 -1  1 -1  1  1 -1
+54   1 -1  1 -1  1  1 -1
+55  -1  1  1 -1  1  1 -1
+56   1  1  1 -1  1  1 -1
+57  -1 -1 -1  1  1  1 -1
+58   1 -1 -1  1  1  1 -1
+59  -1  1 -1  1  1  1 -1
+60   1  1 -1  1  1  1 -1
+61  -1 -1  1  1  1  1 -1
+62   1 -1  1  1  1  1 -1
+63  -1  1  1  1  1  1 -1
+64   1  1  1  1  1  1 -1
+65  -1 -1 -1 -1 -1 -1  1
+66   1 -1 -1 -1 -1 -1  1
+67  -1  1 -1 -1 -1 -1  1
+68   1  1 -1 -1 -1 -1  1
+69  -1 -1  1 -1 -1 -1  1
+70   1 -1  1 -1 -1 -1  1
+71  -1  1  1 -1 -1 -1  1
+72   1  1  1 -1 -1 -1  1
+73  -1 -1 -1  1 -1 -1  1
+74   1 -1 -1  1 -1 -1  1
+75  -1  1 -1  1 -1 -1  1
+76   1  1 -1  1 -1 -1  1
+77  -1 -1  1  1 -1 -1  1
+78   1 -1  1  1 -1 -1  1
+79  -1  1  1  1 -1 -1  1
+80   1  1  1  1 -1 -1  1
+81  -1 -1 -1 -1  1 -1  1
+82   1 -1 -1 -1  1 -1  1
+83  -1  1 -1 -1  1 -1  1
+84   1  1 -1 -1  1 -1  1
+85  -1 -1  1 -1  1 -1  1
+86   1 -1  1 -1  1 -1  1
+87  -1  1  1 -1  1 -1  1
+88   1  1  1 -1  1 -1  1
+89  -1 -1 -1  1  1 -1  1
+90   1 -1 -1  1  1 -1  1
+91  -1  1 -1  1  1 -1  1
+92   1  1 -1  1  1 -1  1
+93  -1 -1  1  1  1 -1  1
+94   1 -1  1  1  1 -1  1
+95  -1  1  1  1  1 -1  1
+96   1  1  1  1  1 -1  1
+97  -1 -1 -1 -1 -1  1  1
+98   1 -1 -1 -1 -1  1  1
+99  -1  1 -1 -1 -1  1  1
+100  1  1 -1 -1 -1  1  1
+101 -1 -1  1 -1 -1  1  1
+102  1 -1  1 -1 -1  1  1
+103 -1  1  1 -1 -1  1  1
+104  1  1  1 -1 -1  1  1
+105 -1 -1 -1  1 -1  1  1
+106  1 -1 -1  1 -1  1  1
+107 -1  1 -1  1 -1  1  1
+108  1  1 -1  1 -1  1  1
+109 -1 -1  1  1 -1  1  1
+110  1 -1  1  1 -1  1  1
+111 -1  1  1  1 -1  1  1
+112  1  1  1  1 -1  1  1
+113 -1 -1 -1 -1  1  1  1
+114  1 -1 -1 -1  1  1  1
+115 -1  1 -1 -1  1  1  1
+116  1  1 -1 -1  1  1  1
+117 -1 -1  1 -1  1  1  1
+118  1 -1  1 -1  1  1  1
+119 -1  1  1 -1  1  1  1
+120  1  1  1 -1  1  1  1
+121 -1 -1 -1  1  1  1  1
+122  1 -1 -1  1  1  1  1
+123 -1  1 -1  1  1  1  1
+124  1  1 -1  1  1  1  1
+125 -1 -1  1  1  1  1  1
+126  1 -1  1  1  1  1  1
+127 -1  1  1  1  1  1  1
+128  1  1  1  1  1  1  1</code></pre>
+</div>
+<p>This can be an input to specify the design using another function, say with <code>optFederov</code> which uses Federov’s exchange algorithm to generate the design.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>desF</span> <span class='op'>&lt;-</span> <span class='fu'>optFederov</span><span class='op'>(</span><span class='op'>~</span> <span class='va'>.</span><span class='op'>^</span><span class='fl'>2</span>, 
+                   data <span class='op'>=</span> <span class='va'>dat</span>,
+                   nTrials <span class='op'>=</span> <span class='fl'>32</span>,
+                   nRepeats <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>desF</span>
+</code></pre>
+</div>
+<pre class="scroll-output"><code>$D
+[1] 0.8867999
+
+$A
+[1] 1.296784
+
+$Ge
+[1] 0.412
+
+$Dea
+[1] 0.241
+
+$design
+    X1 X2 X3 X4 X5 X6 X7
+4    1  1 -1 -1 -1 -1 -1
+5   -1 -1  1 -1 -1 -1 -1
+10   1 -1 -1  1 -1 -1 -1
+11  -1  1 -1  1 -1 -1 -1
+16   1  1  1  1 -1 -1 -1
+17  -1 -1 -1 -1  1 -1 -1
+23  -1  1  1 -1  1 -1 -1
+28   1  1 -1  1  1 -1 -1
+30   1 -1  1  1  1 -1 -1
+33  -1 -1 -1 -1 -1  1 -1
+38   1 -1  1 -1 -1  1 -1
+44   1  1 -1  1 -1  1 -1
+50   1 -1 -1 -1  1  1 -1
+51  -1  1 -1 -1  1  1 -1
+56   1  1  1 -1  1  1 -1
+61  -1 -1  1  1  1  1 -1
+66   1 -1 -1 -1 -1 -1  1
+67  -1  1 -1 -1 -1 -1  1
+72   1  1  1 -1 -1 -1  1
+76   1  1 -1  1 -1 -1  1
+77  -1 -1  1  1 -1 -1  1
+84   1  1 -1 -1  1 -1  1
+86   1 -1  1 -1  1 -1  1
+90   1 -1 -1  1  1 -1  1
+95  -1  1  1  1  1 -1  1
+100  1  1 -1 -1 -1  1  1
+105 -1 -1 -1  1 -1  1  1
+110  1 -1  1  1 -1  1  1
+111 -1  1  1  1 -1  1  1
+117 -1 -1  1 -1  1  1  1
+123 -1  1 -1  1  1  1  1
+128  1  1  1  1  1  1  1
+
+$rows
+ [1]   4   5  10  11  16  17  23  28  30  33  38  44  50  51  56  61
+[17]  66  67  72  76  77  84  86  90  95 100 105 110 111 117 123 128</code></pre>
+</div>
+<p>If you want to further randomise within blocks, you can pass the above result to <code>optBlock</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>desFBlk</span> <span class='op'>&lt;-</span> <span class='fu'>optBlock</span><span class='op'>(</span><span class='op'>~</span> <span class='va'>.</span><span class='op'>^</span><span class='fl'>2</span>, 
+                    withinData <span class='op'>=</span> <span class='va'>desF</span><span class='op'>$</span><span class='va'>design</span>,
+                    blocksizes <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>8</span>, <span class='fl'>4</span><span class='op'>)</span>,
+                    nRepeats <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
+
+<span class='va'>desFBlk</span>
+</code></pre>
+</div>
+<pre class="scroll-output"><code>$D
+[1] 0.8049815
+
+$diagonality
+[1] 0.836
+
+$Blocks
+$Blocks$B1
+    X1 X2 X3 X4 X5 X6 X7
+4    1  1 -1 -1 -1 -1 -1
+17  -1 -1 -1 -1  1 -1 -1
+23  -1  1  1 -1  1 -1 -1
+33  -1 -1 -1 -1 -1  1 -1
+77  -1 -1  1  1 -1 -1  1
+84   1  1 -1 -1  1 -1  1
+90   1 -1 -1  1  1 -1  1
+123 -1  1 -1  1  1  1  1
+
+$Blocks$B2
+    X1 X2 X3 X4 X5 X6 X7
+10   1 -1 -1  1 -1 -1 -1
+16   1  1  1  1 -1 -1 -1
+28   1  1 -1  1  1 -1 -1
+50   1 -1 -1 -1  1  1 -1
+61  -1 -1  1  1  1  1 -1
+67  -1  1 -1 -1 -1 -1  1
+86   1 -1  1 -1  1 -1  1
+100  1  1 -1 -1 -1  1  1
+
+$Blocks$B3
+    X1 X2 X3 X4 X5 X6 X7
+5   -1 -1  1 -1 -1 -1 -1
+11  -1  1 -1  1 -1 -1 -1
+30   1 -1  1  1  1 -1 -1
+44   1  1 -1  1 -1  1 -1
+56   1  1  1 -1  1  1 -1
+66   1 -1 -1 -1 -1 -1  1
+95  -1  1  1  1  1 -1  1
+110  1 -1  1  1 -1  1  1
+
+$Blocks$B4
+    X1 X2 X3 X4 X5 X6 X7
+38   1 -1  1 -1 -1  1 -1
+51  -1  1 -1 -1  1  1 -1
+72   1  1  1 -1 -1 -1  1
+76   1  1 -1  1 -1 -1  1
+105 -1 -1 -1  1 -1  1  1
+111 -1  1  1  1 -1  1  1
+117 -1 -1  1 -1  1  1  1
+128  1  1  1  1  1  1  1
+
+
+$design
+    X1 X2 X3 X4 X5 X6 X7
+4    1  1 -1 -1 -1 -1 -1
+17  -1 -1 -1 -1  1 -1 -1
+23  -1  1  1 -1  1 -1 -1
+33  -1 -1 -1 -1 -1  1 -1
+77  -1 -1  1  1 -1 -1  1
+84   1  1 -1 -1  1 -1  1
+90   1 -1 -1  1  1 -1  1
+123 -1  1 -1  1  1  1  1
+10   1 -1 -1  1 -1 -1 -1
+16   1  1  1  1 -1 -1 -1
+28   1  1 -1  1  1 -1 -1
+50   1 -1 -1 -1  1  1 -1
+61  -1 -1  1  1  1  1 -1
+67  -1  1 -1 -1 -1 -1  1
+86   1 -1  1 -1  1 -1  1
+100  1  1 -1 -1 -1  1  1
+5   -1 -1  1 -1 -1 -1 -1
+11  -1  1 -1  1 -1 -1 -1
+30   1 -1  1  1  1 -1 -1
+44   1  1 -1  1 -1  1 -1
+56   1  1  1 -1  1  1 -1
+66   1 -1 -1 -1 -1 -1  1
+95  -1  1  1  1  1 -1  1
+110  1 -1  1  1 -1  1  1
+38   1 -1  1 -1 -1  1 -1
+51  -1  1 -1 -1  1  1 -1
+72   1  1  1 -1 -1 -1  1
+76   1  1 -1  1 -1 -1  1
+105 -1 -1 -1  1 -1  1  1
+111 -1  1  1  1 -1  1  1
+117 -1 -1  1 -1  1  1  1
+128  1  1  1  1  1  1  1
+
+$rows
+ [1]   4  17  23  33  77  84  90 123  10  16  28  50  61  67  86 100
+[17]   5  11  30  44  56  66  95 110  38  51  72  76 105 111 117 128</code></pre>
+</div>
+<h2 id="agricolae"><code>agricolae</code></h2>
+<p><code>agricolae</code> is motivated by agricultural applications although the designs are applicable across a variety of fields.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tarwi.lamolina.edu.pe/~fmendiburu'>agricolae</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>The functions to create the design all begin with the word “design.” and the names of the functions are remnant of the name of the experimental design. E.g. <code>design.rcbd</code> generates a Randomised Complete Block Design and <code>design.split</code> generates a Split Plot Design.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span><span class='st'>"package:agricolae"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> 
+  <span class='fu'>str_subset</span><span class='op'>(</span><span class='st'>"^design."</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code> [1] &quot;design.ab&quot;      &quot;design.alpha&quot;   &quot;design.bib&quot;    
+ [4] &quot;design.crd&quot;     &quot;design.cyclic&quot;  &quot;design.dau&quot;    
+ [7] &quot;design.graeco&quot;  &quot;design.lattice&quot; &quot;design.lsd&quot;    
+[10] &quot;design.mat&quot;     &quot;design.rcbd&quot;    &quot;design.split&quot;  
+[13] &quot;design.strip&quot;   &quot;design.youden&quot; </code></pre>
+</div>
+<p>Rather than going through each of the functions, I’ll just show one. The command below generates a balanced incomplete block design with 7 treatments of block size 3. This the same design structure as the first example for <code>AlgDesign</code>. What do you think of the input and output?</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>trt</span> <span class='op'>&lt;-</span> <span class='va'>LETTERS</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>7</span><span class='op'>]</span>
+<span class='fu'><a href='https://rdrr.io/pkg/agricolae/man/design.bib.html'>design.bib</a></span><span class='op'>(</span>trt <span class='op'>=</span> <span class='va'>trt</span>, k <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre class="scroll-output"><code>
+Parameters BIB
+==============
+Lambda     : 1
+treatmeans : 7
+Block size : 3
+Blocks     : 7
+Replication: 3 
+
+Efficiency factor 0.7777778 
+
+&lt;&lt;&lt; Book &gt;&gt;&gt;</code></pre>
+<pre class="scroll-output"><code>$parameters
+$parameters$design
+[1] &quot;bib&quot;
+
+$parameters$trt
+[1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot; &quot;E&quot; &quot;F&quot; &quot;G&quot;
+
+$parameters$k
+[1] 3
+
+$parameters$serie
+[1] 2
+
+$parameters$seed
+[1] 1804898417
+
+$parameters$kinds
+[1] &quot;Super-Duper&quot;
+
+
+$statistics
+       lambda treatmeans blockSize blocks r Efficiency
+values      1          7         3      7 3  0.7777778
+
+$sketch
+     [,1] [,2] [,3]
+[1,] &quot;C&quot;  &quot;B&quot;  &quot;D&quot; 
+[2,] &quot;A&quot;  &quot;E&quot;  &quot;B&quot; 
+[3,] &quot;F&quot;  &quot;B&quot;  &quot;G&quot; 
+[4,] &quot;G&quot;  &quot;C&quot;  &quot;E&quot; 
+[5,] &quot;G&quot;  &quot;A&quot;  &quot;D&quot; 
+[6,] &quot;A&quot;  &quot;F&quot;  &quot;C&quot; 
+[7,] &quot;F&quot;  &quot;E&quot;  &quot;D&quot; 
+
+$book
+   plots block trt
+1    101     1   C
+2    102     1   B
+3    103     1   D
+4    201     2   A
+5    202     2   E
+6    203     2   B
+7    301     3   F
+8    302     3   B
+9    303     3   G
+10   401     4   G
+11   402     4   C
+12   403     4   E
+13   501     5   G
+14   502     5   A
+15   503     5   D
+16   601     6   A
+17   602     6   F
+18   603     6   C
+19   701     7   F
+20   702     7   E
+21   703     7   D</code></pre>
+</div>
+<p>More examples are given in the <a href="https://cran.r-project.org/web/packages/agricolae/vignettes/tutorial.pdf"><code>agricolae</code> tutorial</a>.</p>
+<h2 id="lhs"><code>lhs</code></h2>
+<p>The <code>lhs</code> package is completely different to the previous two packages. It implements methods for creating and augmenting Latin Hypercube Samples and Orthogonal Array Latin Hypercube Samples. The treatment variables here are the parameters and are continuous. In the example below, there are 10 parameters were 30 samples will be drawn from.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/bertcarnell/lhs'>lhs</a></span><span class='op'>)</span>
+<span class='co'># a design with 30 samples from 10 parameters</span>
+<span class='va'>A</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lhs/man/randomLHS.html'>randomLHS</a></span><span class='op'>(</span><span class='fl'>30</span>, <span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>A</span>
+</code></pre>
+</div>
+<pre class="scroll-output"><code>            [,1]       [,2]       [,3]       [,4]        [,5]
+ [1,] 0.85115160 0.80153721 0.26562089 0.24240381 0.386617133
+ [2,] 0.03162770 0.11851068 0.20750833 0.22137816 0.737580563
+ [3,] 0.94326309 0.99286802 0.55167951 0.04431126 0.073908842
+ [4,] 0.15341898 0.23664814 0.45088836 0.02736497 0.276594703
+ [5,] 0.53987796 0.69129259 0.61068716 0.68112190 0.840092421
+ [6,] 0.34338962 0.91067411 0.50772141 0.46340514 0.543650700
+ [7,] 0.87984431 0.18530938 0.28391957 0.80767211 0.636091307
+ [8,] 0.74093451 0.94142899 0.47633881 0.93482745 0.101815507
+ [9,] 0.22679294 0.05950478 0.70384589 0.84840308 0.046119869
+[10,] 0.59543890 0.14230001 0.91973016 0.38743743 0.008173053
+[11,] 0.71222052 0.84574251 0.05719443 0.33460392 0.414795358
+[12,] 0.31313954 0.55023270 0.67189798 0.98743475 0.480147544
+[13,] 0.06589897 0.02727366 0.94372045 0.11200430 0.776188787
+[14,] 0.67856942 0.64694630 0.11695731 0.57667893 0.576669680
+[15,] 0.60779222 0.47346774 0.57803451 0.77359785 0.686925390
+[16,] 0.77869112 0.45967726 0.97082607 0.72001527 0.158727598
+[17,] 0.47753672 0.33965295 0.34264293 0.88078583 0.932636317
+[18,] 0.24829930 0.28054142 0.82863690 0.48987801 0.831406425
+[19,] 0.63438918 0.62665931 0.19339855 0.63126047 0.222550404
+[20,] 0.42615936 0.78697269 0.31122846 0.54731724 0.618925200
+[21,] 0.98558294 0.31283813 0.79937608 0.09708168 0.974254219
+[22,] 0.82272308 0.72620385 0.63409490 0.51439160 0.888309555
+[23,] 0.28216288 0.40678670 0.00747647 0.15786391 0.462001814
+[24,] 0.44293885 0.88759165 0.87593133 0.17614748 0.301809115
+[25,] 0.91903885 0.58769320 0.85344414 0.73340894 0.261399107
+[26,] 0.39749211 0.21531852 0.40155710 0.40795272 0.175926862
+[27,] 0.53326444 0.09494134 0.36906730 0.28462433 0.521423827
+[28,] 0.12780125 0.76041647 0.14450865 0.32753635 0.958334555
+[29,] 0.19956924 0.39260007 0.76646006 0.65147638 0.353769748
+[30,] 0.09115621 0.53145384 0.09544316 0.91317843 0.722981039
+            [,6]       [,7]       [,8]       [,9]      [,10]
+ [1,] 0.57523291 0.64829514 0.30957145 0.56063376 0.58060694
+ [2,] 0.37572590 0.09386871 0.09460784 0.62699580 0.07496677
+ [3,] 0.33729208 0.14971910 0.02306924 0.12609065 0.18310414
+ [4,] 0.77521524 0.27273750 0.43275425 0.84548534 0.13991032
+ [5,] 0.18545904 0.57024842 0.83876578 0.94430739 0.55675175
+ [6,] 0.04848456 0.68468958 0.93462688 0.69388363 0.77296080
+ [7,] 0.40499358 0.22736413 0.49914901 0.63951785 0.29475412
+ [8,] 0.83195048 0.86262149 0.90864828 0.71549074 0.95154810
+ [9,] 0.20549016 0.82450164 0.34137614 0.35590469 0.33383492
+[10,] 0.11180544 0.99755568 0.77506400 0.90850387 0.04070513
+[11,] 0.71230339 0.51386141 0.51188486 0.74575618 0.47042600
+[12,] 0.14900939 0.62716610 0.60853776 0.19349115 0.85808318
+[13,] 0.31845634 0.36810057 0.68906398 0.48416759 0.10075997
+[14,] 0.68236586 0.46367072 0.53735362 0.97946521 0.53084746
+[15,] 0.46043188 0.79151449 0.39841726 0.16295411 0.32738380
+[16,] 0.52748006 0.73055037 0.10636268 0.45184454 0.60852297
+[17,] 0.08469157 0.11492100 0.64512714 0.26197028 0.87144705
+[18,] 0.28007202 0.90350371 0.27696270 0.41905694 0.25261507
+[19,] 0.84219677 0.41560144 0.73423244 0.01653787 0.01640204
+[20,] 0.98370876 0.54984313 0.26617569 0.32944947 0.20285318
+[21,] 0.48614679 0.73515250 0.59964083 0.87721937 0.82147435
+[22,] 0.94892286 0.89461948 0.05944528 0.27581653 0.97355201
+[23,] 0.89070787 0.95209334 0.17557806 0.57880924 0.65490041
+[24,] 0.03273681 0.35714952 0.82135876 0.80705301 0.91792197
+[25,] 0.65831637 0.31657015 0.44139011 0.39117389 0.72964052
+[26,] 0.54073941 0.03568867 0.88231315 0.53096409 0.45227701
+[27,] 0.62613184 0.18195056 0.23326926 0.79716759 0.42737304
+[28,] 0.25256769 0.48629095 0.72335715 0.07429013 0.67936824
+[29,] 0.90342254 0.03184096 0.15672156 0.06023826 0.73960757
+[30,] 0.74109078 0.23509647 0.98392432 0.20423196 0.38968498</code></pre>
+</div>
+<p><code>lhs</code> provides a number of methods to find the optimal design each with their own criteria.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>A1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lhs/man/optimumLHS.html'>optimumLHS</a></span><span class='op'>(</span><span class='fl'>30</span>, <span class='fl'>10</span>, maxSweeps <span class='op'>=</span> <span class='fl'>4</span>, eps <span class='op'>=</span> <span class='fl'>0.01</span><span class='op'>)</span>
+<span class='va'>A2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lhs/man/maximinLHS.html'>maximinLHS</a></span><span class='op'>(</span><span class='fl'>30</span>, <span class='fl'>10</span>, dup <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>A3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lhs/man/improvedLHS.html'>improvedLHS</a></span><span class='op'>(</span><span class='fl'>30</span>, <span class='fl'>10</span>, dup <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>A4</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lhs/man/geneticLHS.html'>geneticLHS</a></span><span class='op'>(</span><span class='fl'>30</span>, <span class='fl'>10</span>, pop <span class='op'>=</span> <span class='fl'>1000</span>, gen <span class='op'>=</span> <span class='fl'>8</span>, pMut <span class='op'>=</span> <span class='fl'>0.1</span>, criterium <span class='op'>=</span> <span class='st'>"S"</span><span class='op'>)</span>
+<span class='va'>A5</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/lhs/man/geneticLHS.html'>geneticLHS</a></span><span class='op'>(</span><span class='fl'>30</span>, <span class='fl'>10</span>, pop <span class='op'>=</span> <span class='fl'>1000</span>, gen <span class='op'>=</span> <span class='fl'>8</span>, pMut <span class='op'>=</span> <span class='fl'>0.1</span>, criterium <span class='op'>=</span> <span class='st'>"Maximin"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<h2 id="ez"><code>ez</code></h2>
+<p>This is mainly focussed on the analysis of experimental data but some functions such as <code>ezDesign</code> is useful for viewing the experimental structure.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://github.com/mike-lawrence/ez'>ez</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>ANT2</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/ez/man/ezPrecis.html'>ezPrecis</a></span><span class='op'>(</span><span class='va'>ANT2</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Data frame dimensions: 5760 rows, 10 columns</code></pre>
+<pre><code>             type missing values      min         max
+subnum    numeric       0     20        1          20
+group      factor       0      2  Control   Treatment
+block     numeric       0      6        1           6
+trial      factor       0     48        1          48
+cue        factor       0      4     None     Spatial
+flank      factor       0      3  Neutral Incongruent
+location   factor       0      2     down          up
+direction  factor       0      2     left       right
+rt        numeric     144   5617 179.5972    657.6986
+error     numeric     144      3        0           1</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/ez/man/ezDesign.html'>ezDesign</a></span><span class='op'>(</span>data <span class='op'>=</span> <span class='va'>ANT2</span>,
+         x <span class='op'>=</span> <span class='va'>trial</span>, 
+         y <span class='op'>=</span> <span class='va'>subnum</span>,
+         row <span class='op'>=</span> <span class='va'>block</span>, 
+         col <span class='op'>=</span> <span class='va'>group</span><span class='op'>)</span>
+</code></pre>
+</div>
+<p><img src="figures/unnamed-chunk-15-1.png" width="624" style="display: block; margin: auto;" /></p>
+</div>
+<h2 id="doe.base"><code>DoE.base</code></h2>
+<p><code>DoE.base</code> provides utility functions for the special class <code>design</code> and as seen in Figure <a href="#fig:doe-network">1</a>, <code>DoE.base</code> is used by <a href="https://prof.beuth-hochschule.de/groemping/software/versuchsplanung/?print=232">four other DoE packages that is maintained also by Prof. Dr. Ulrike Grömping</a>.</p>
+<p><code>DoE.base</code> contains functions to generate factorial designs easily.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://prof.beuth-hochschule.de/groemping/DoE/'>DoE.base</a></span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/DoE.base/man/fac.design.html'>fac.design</a></span><span class='op'>(</span>nlevels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>6</span><span class='op'>)</span>, 
+           blocks <span class='op'>=</span> <span class='fl'>6</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre class="scroll-output"><code>   run.no run.no.std.rp Blocks A B C D E
+1       1        29.1.5      1 1 1 2 3 1
+2       2       89.1.15      1 1 1 2 2 3
+3       3      180.1.30      1 2 2 3 3 5
+4       4         4.1.2      1 2 2 1 1 1
+5       5       84.1.14      1 2 2 3 1 3
+6       6      160.1.28      1 2 2 1 2 5
+7       7      118.1.19      1 2 1 3 1 4
+8       8      186.1.31      1 2 1 2 1 6
+9       9       97.1.17      1 1 1 1 3 3
+10     10       92.1.16      1 2 2 2 2 3
+11     11      214.1.35      1 2 1 3 3 6
+12     12      194.1.33      1 2 1 1 2 6
+13     13        39.1.8      1 1 2 1 1 2
+14     14         1.1.1      1 1 1 1 1 1
+15     15      119.1.20      1 1 2 3 1 4
+16     16      127.1.22      1 1 2 2 2 4
+17     17      134.1.23      1 2 1 1 3 4
+18     18        58.1.9      1 2 1 3 2 2
+19     19      135.1.24      1 1 2 1 3 4
+20     20      149.1.25      1 1 1 2 1 5
+21     21       59.1.10      1 1 2 3 2 2
+22     22        38.1.7      1 2 1 1 1 2
+23     23       67.1.12      1 1 2 2 3 2
+24     24      195.1.34      1 1 2 1 2 6
+25     25        32.1.6      1 2 2 2 3 1
+26     26       66.1.11      1 2 1 2 3 2
+27     27      152.1.26      1 2 2 2 1 5
+28     28        21.1.3      1 1 1 3 2 1
+29     29      157.1.27      1 1 1 1 2 5
+30     30      215.1.36      1 1 2 3 3 6
+31     31      100.1.18      1 2 2 1 3 3
+32     32      187.1.32      1 1 2 2 1 6
+33     33      177.1.29      1 1 1 3 3 5
+34     34      126.1.21      1 2 1 2 2 4
+35     35       81.1.13      1 1 1 3 1 3
+36     36        24.1.4      1 2 2 3 2 1
+   run.no run.no.std.rp Blocks A B C D E
+37     37        16.2.4      2 2 2 1 2 1
+38     38      169.2.29      2 1 1 1 3 5
+39     39        43.2.8      2 1 2 2 1 2
+40     40      199.2.34      2 1 2 2 2 6
+41     41      104.2.18      2 2 2 2 3 3
+42     42      206.2.35      2 2 1 1 3 6
+43     43      131.2.22      2 1 2 3 2 4
+44     44      138.2.23      2 2 1 2 3 4
+45     45      172.2.30      2 2 2 1 3 5
+46     46      110.2.19      2 2 1 1 1 4
+47     47      161.2.27      2 1 1 2 2 5
+48     48         5.2.1      2 1 1 2 1 1
+49     49        42.2.7      2 2 1 2 1 2
+50     50       73.2.13      2 1 1 1 1 3
+51     51      191.2.32      2 1 2 3 1 6
+52     52       93.2.15      2 1 1 3 2 3
+53     53      156.2.26      2 2 2 3 1 5
+54     54       96.2.16      2 2 2 3 2 3
+55     55       51.2.10      2 1 2 1 2 2
+56     56      101.2.17      2 1 1 2 3 3
+57     57        13.2.3      2 1 1 1 2 1
+58     58      111.2.20      2 1 2 1 1 4
+59     59      130.2.21      2 2 1 3 2 4
+60     60       76.2.14      2 2 2 1 1 3
+61     61      198.2.33      2 2 1 2 2 6
+62     62      190.2.31      2 2 1 3 1 6
+63     63        33.2.5      2 1 1 3 3 1
+64     64      153.2.25      2 1 1 3 1 5
+65     65      164.2.28      2 2 2 2 2 5
+66     66        50.2.9      2 2 1 1 2 2
+67     67      207.2.36      2 1 2 1 3 6
+68     68       71.2.12      2 1 2 3 3 2
+69     69        36.2.6      2 2 2 3 3 1
+70     70         8.2.2      2 2 2 2 1 1
+71     71       70.2.11      2 2 1 3 3 2
+72     72      139.2.24      2 1 2 2 3 4
+    run.no run.no.std.rp Blocks A B C D E
+73      73       85.3.15      3 1 1 1 2 3
+74      74      105.3.17      3 1 1 3 3 3
+75      75        17.3.3      3 1 1 2 2 1
+76      76      211.3.36      3 1 2 2 3 6
+77      77      114.3.19      3 2 1 2 1 4
+78      78        47.3.8      3 1 2 3 1 2
+79      79       55.3.10      3 1 2 2 2 2
+80      80      182.3.31      3 2 1 1 1 6
+81      81      168.3.28      3 2 2 3 2 5
+82      82      165.3.27      3 1 1 3 2 5
+83      83      142.3.23      3 2 1 3 3 4
+84      84      145.3.25      3 1 1 1 1 5
+85      85       62.3.11      3 2 1 1 3 2
+86      86      148.3.26      3 2 2 1 1 5
+87      87      108.3.18      3 2 2 3 3 3
+88      88        25.3.5      3 1 1 1 3 1
+89      89         9.3.1      3 1 1 3 1 1
+90      90       77.3.13      3 1 1 2 1 3
+91      91      122.3.21      3 2 1 1 2 4
+92      92        12.3.2      3 2 2 3 1 1
+93      93        46.3.7      3 2 1 3 1 2
+94      94       88.3.16      3 2 2 1 2 3
+95      95        20.3.4      3 2 2 2 2 1
+96      96        54.3.9      3 2 1 2 2 2
+97      97      203.3.34      3 1 2 3 2 6
+98      98       80.3.14      3 2 2 2 1 3
+99      99      123.3.22      3 1 2 1 2 4
+100    100      173.3.29      3 1 1 2 3 5
+101    101        28.3.6      3 2 2 1 3 1
+102    102      176.3.30      3 2 2 2 3 5
+103    103      202.3.33      3 2 1 3 2 6
+104    104      115.3.20      3 1 2 2 1 4
+105    105      210.3.35      3 2 1 2 3 6
+106    106      183.3.32      3 1 2 1 1 6
+107    107       63.3.12      3 1 2 1 3 2
+108    108      143.3.24      3 1 2 3 3 4
+    run.no run.no.std.rp Blocks A B C D E
+109    109      179.4.30      4 1 2 3 3 5
+110    110      151.4.26      4 1 2 2 1 5
+111    111       60.4.10      4 2 2 3 2 2
+112    112        31.4.6      4 1 2 2 3 1
+113    113         3.4.2      4 1 2 1 1 1
+114    114        22.4.3      4 2 1 3 2 1
+115    115       99.4.18      4 1 2 1 3 3
+116    116        30.4.5      4 2 1 2 3 1
+117    117       68.4.12      4 2 2 2 3 2
+118    118      196.4.34      4 2 2 1 2 6
+119    119       90.4.15      4 2 1 2 2 3
+120    120        57.4.9      4 1 1 3 2 2
+121    121      158.4.27      4 2 1 1 2 5
+122    122      193.4.33      4 1 1 1 2 6
+123    123      136.4.24      4 2 2 1 3 4
+124    124       82.4.13      4 2 1 3 1 3
+125    125       65.4.11      4 1 1 2 3 2
+126    126        37.4.7      4 1 1 1 1 2
+127    127      120.4.20      4 2 2 3 1 4
+128    128      178.4.29      4 2 1 3 3 5
+129    129      128.4.22      4 2 2 2 2 4
+130    130      188.4.32      4 2 2 2 1 6
+131    131         2.4.1      4 2 1 1 1 1
+132    132       91.4.16      4 1 2 2 2 3
+133    133      185.4.31      4 1 1 2 1 6
+134    134      159.4.28      4 1 2 1 2 5
+135    135       98.4.17      4 2 1 1 3 3
+136    136        40.4.8      4 2 2 1 1 2
+137    137      150.4.25      4 2 1 2 1 5
+138    138      125.4.21      4 1 1 2 2 4
+139    139       83.4.14      4 1 2 3 1 3
+140    140      133.4.23      4 1 1 1 3 4
+141    141        23.4.4      4 1 2 3 2 1
+142    142      117.4.19      4 1 1 3 1 4
+143    143      216.4.36      4 2 2 3 3 6
+144    144      213.4.35      4 1 1 3 3 6
+    run.no run.no.std.rp Blocks A B C D E
+145    145      171.5.30      5 1 2 1 3 5
+146    146      102.5.17      5 2 1 2 3 3
+147    147      162.5.27      5 2 1 2 2 5
+148    148      112.5.20      5 2 2 1 1 4
+149    149      154.5.25      5 2 1 3 1 5
+150    150       74.5.13      5 2 1 1 1 3
+151    151      163.5.28      5 1 2 2 2 5
+152    152        15.5.4      5 1 2 1 2 1
+153    153       72.5.12      5 2 2 3 3 2
+154    154       95.5.16      5 1 2 3 2 3
+155    155      205.5.35      5 1 1 1 3 6
+156    156        35.5.6      5 1 2 3 3 1
+157    157         7.5.2      5 1 2 2 1 1
+158    158      129.5.21      5 1 1 3 2 4
+159    159         6.5.1      5 2 1 2 1 1
+160    160       75.5.14      5 1 2 1 1 3
+161    161      208.5.36      5 2 2 1 3 6
+162    162        14.5.3      5 2 1 1 2 1
+163    163       94.5.15      5 2 1 3 2 3
+164    164      132.5.22      5 2 2 3 2 4
+165    165        34.5.5      5 2 1 3 3 1
+166    166       69.5.11      5 1 1 3 3 2
+167    167      170.5.29      5 2 1 1 3 5
+168    168      137.5.23      5 1 1 2 3 4
+169    169       52.5.10      5 2 2 1 2 2
+170    170      155.5.26      5 1 2 3 1 5
+171    171        49.5.9      5 1 1 1 2 2
+172    172      200.5.34      5 2 2 2 2 6
+173    173        41.5.7      5 1 1 2 1 2
+174    174      192.5.32      5 2 2 3 1 6
+175    175        44.5.8      5 2 2 2 1 2
+176    176      140.5.24      5 2 2 2 3 4
+177    177      197.5.33      5 1 1 2 2 6
+178    178      109.5.19      5 1 1 1 1 4
+179    179      103.5.18      5 1 2 2 3 3
+180    180      189.5.31      5 1 1 3 1 6
+    run.no run.no.std.rp Blocks A B C D E
+181    181      106.6.17      6 2 1 3 3 3
+182    182      146.6.25      6 2 1 1 1 5
+183    183       79.6.14      6 1 2 2 1 3
+184    184        53.6.9      6 1 1 2 2 2
+185    185      209.6.35      6 1 1 2 3 6
+186    186       64.6.12      6 2 2 1 3 2
+187    187      166.6.27      6 2 1 3 2 5
+188    188        19.6.4      6 1 2 2 2 1
+189    189      204.6.34      6 2 2 3 2 6
+190    190        26.6.5      6 2 1 1 3 1
+191    191       78.6.13      6 2 1 2 1 3
+192    192       56.6.10      6 2 2 2 2 2
+193    193      181.6.31      6 1 1 1 1 6
+194    194      174.6.29      6 2 1 2 3 5
+195    195       87.6.16      6 1 2 1 2 3
+196    196        10.6.1      6 2 1 3 1 1
+197    197      212.6.36      6 2 2 2 3 6
+198    198      147.6.26      6 1 2 1 1 5
+199    199      107.6.18      6 1 2 3 3 3
+200    200        48.6.8      6 2 2 3 1 2
+201    201      116.6.20      6 2 2 2 1 4
+202    202       86.6.15      6 2 1 1 2 3
+203    203      184.6.32      6 2 2 1 1 6
+204    204        27.6.6      6 1 2 1 3 1
+205    205      124.6.22      6 2 2 1 2 4
+206    206      141.6.23      6 1 1 3 3 4
+207    207      201.6.33      6 1 1 3 2 6
+208    208        18.6.3      6 2 1 2 2 1
+209    209        45.6.7      6 1 1 3 1 2
+210    210      113.6.19      6 1 1 2 1 4
+211    211      167.6.28      6 1 2 3 2 5
+212    212      121.6.21      6 1 1 1 2 4
+213    213      144.6.24      6 2 2 3 3 4
+214    214       61.6.11      6 1 1 1 3 2
+215    215      175.6.30      6 1 2 2 3 5
+216    216        11.6.2      6 1 2 3 1 1
+class=design, type= full factorial.blocked 
+NOTE: columns run.no and run.no.std.rp  are annotation, 
+ not part of the data frame</code></pre>
+</div>
+<p>It also contains functions to create orthogonal array designs.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>des</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/DoE.base/man/oa.design.html'>oa.design</a></span><span class='op'>(</span>nlevels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>8</span><span class='op'>)</span>, <span class='fl'>8</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>des</span>
+</code></pre>
+</div>
+<pre class="scroll-output"><code>   A B C D E F G H J
+1  1 2 1 2 2 1 2 1 6
+2  2 1 2 1 2 1 2 1 2
+3  2 1 1 2 2 1 1 2 4
+4  2 2 1 1 2 2 1 1 3
+5  1 1 1 1 2 2 2 2 5
+6  1 1 2 2 2 2 1 1 7
+7  1 2 1 2 1 2 1 2 2
+8  1 1 1 1 1 1 1 1 1
+9  1 2 2 1 2 1 1 2 8
+10 1 1 2 2 1 1 2 2 3
+11 2 1 2 1 1 2 1 2 6
+12 2 1 1 2 1 2 2 1 8
+13 2 2 2 2 1 1 1 1 5
+14 2 2 1 1 1 1 2 2 7
+15 1 2 2 1 1 2 2 1 4
+16 2 2 2 2 2 2 2 2 1
+class=design, type= oa </code></pre>
+</div>
+<p>If you need to further randomise within a specified block, you can do this using <code>rerandomize.design</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/DoE.base/man/getblock.html'>rerandomize.design</a></span><span class='op'>(</span><span class='va'>des</span>, block <span class='op'>=</span> <span class='st'>"J"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre class="scroll-output"><code>  run.no run.no.std.rp J A B C D E F G H
+1      1         4.7.1 7 1 1 2 2 2 2 1 1
+2      2        13.7.2 7 2 2 1 1 1 1 2 2
+  run.no run.no.std.rp J A B C D E F G H
+3      3         7.4.1 4 1 2 2 1 1 2 2 1
+4      4        10.4.2 4 2 1 1 2 2 1 1 2
+  run.no run.no.std.rp J A B C D E F G H
+5      5        12.2.2 2 2 1 2 1 2 1 2 1
+6      6         5.2.1 2 1 2 1 2 1 2 1 2
+  run.no run.no.std.rp J A B C D E F G H
+7      7        11.6.2 6 2 1 2 1 1 2 1 2
+8      8         6.6.1 6 1 2 1 2 2 1 2 1
+   run.no run.no.std.rp J A B C D E F G H
+9       9         9.8.2 8 2 1 1 2 1 2 2 1
+10     10         8.8.1 8 1 2 2 1 2 1 1 2
+   run.no run.no.std.rp J A B C D E F G H
+11     11         3.3.1 3 1 1 2 2 1 1 2 2
+12     12        14.3.2 3 2 2 1 1 2 2 1 1
+   run.no run.no.std.rp J A B C D E F G H
+13     13        16.1.2 1 2 2 2 2 2 2 2 2
+14     14         1.1.1 1 1 1 1 1 1 1 1 1
+   run.no run.no.std.rp J A B C D E F G H
+15     15         2.5.1 5 1 1 1 1 2 2 2 2
+16     16        15.5.2 5 2 2 2 2 1 1 1 1
+class=design, type= oa.blocked 
+NOTE: columns run.no and run.no.std.rp  are annotation, 
+ not part of the data frame</code></pre>
+</div>
+<p>So those were the top 5 DoE packages. The API of the packages are quite distinct. The object that it outputs can vary from a matrix to a list. DoE might be a dull area for many but it’s quite important for the downstream analysis. Perhaps if many of us talk more about it, it may help invigorate the area!</p>
+<div class="layout-chunk" data-layout="l-body">
+<script type="text/javascript">
+function showscript() {
+  var x = document.getElementsByClassName('toggle-code');
+  var n = x.length;
+  for (var i = 0; i < n; i++) {
+    var e = x[i];
+    if (e.style.display == "block") {
+      e.style.display = "none";
+    } else {
+      e.style.display = "block";
+    }
+  }
+}
+</script>
+</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div id="refs" class="references hanging-indent" role="doc-bibliography">
+<div id="ref-lhs">
+<p>Carnell, Rob. 2020. <em>Lhs: Latin Hypercube Samples</em>. <a href="https://CRAN.R-project.org/package=lhs">https://CRAN.R-project.org/package=lhs</a>.</p>
+</div>
+<div id="ref-Chatfield1985-yz">
+<p>Chatfield, C. 1985. “The Initial Examination of Data.” <em>Journal of the Royal Statistical Society. Series A</em> 148 (3): 214–53.</p>
+</div>
+<div id="ref-agricolae">
+<p>de Mendiburu, Felipe. 2020. <em>Agricolae: Statistical Procedures for Agricultural Research</em>. <a href="https://CRAN.R-project.org/package=agricolae">https://CRAN.R-project.org/package=agricolae</a>.</p>
+</div>
+<div id="ref-DoE.base">
+<p>Grömping, Ulrike. 2018. “R Package DoE.base for Factorial Experiments.” <em>Journal of Statistical Software</em> 85 (5): 1–41. <a href="https://doi.org/10.18637/jss.v085.i05">https://doi.org/10.18637/jss.v085.i05</a>.</p>
+</div>
+<div id="ref-ez">
+<p>Lawrence, Michael A. 2016. <em>Ez: Easy Analysis and Visualization of Factorial Experiments</em>. <a href="https://CRAN.R-project.org/package=ez">https://CRAN.R-project.org/package=ez</a>.</p>
+</div>
+<div id="ref-adjustedcranlogs">
+<p>Morgan-Wall, Tyler. 2017. <em>Adjustedcranlogs: Remove Automated and Repeated Downloads from ’Rstudio’ ’Cran’ Download Logs</em>. <a href="https://CRAN.R-project.org/package=adjustedcranlogs">https://CRAN.R-project.org/package=adjustedcranlogs</a>.</p>
+</div>
+<div id="ref-AlgDesign">
+<p>Wheeler, Bob. 2019. <em>AlgDesign: Algorithmic Experimental Design</em>. <a href="https://CRAN.R-project.org/package=AlgDesign">https://CRAN.R-project.org/package=AlgDesign</a>.</p>
+</div>
+</div>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>At least from my teaching experience, statistics subjects are primary about the analysis and most research grants I’ve seen are about an analytical method. The analytical focus is reflected also in the R packages; there are 1,779 R-packages on CRAN with the word “analysis” in the title as opposed to 257 R-packages with the word “design” in its title.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Keeping in mind though that your analysis plan may change once you actually have collected data. This is quite common in the analysis of plant breeding trials since some spatial variation only become apparent only after the data collection.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>I originally had a webscrapping error where I didn’t remove duplicate entries so numbers presented at <a href="https://emitanaka.org/slides/TokyoR2021/#32">TokyoR</a> and <a href="https://emitanaka.org/slides/SSA2020/#52">SSA Webinar</a> had the wrong numbers.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4" role="doc-endnote"><p>As of 2021-02-07.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+<!--radix_placeholder_article_footer-->
+<div class="article-footer">
+  <p class="social_footer">
+    <span class="disqus-comments">
+      <i class="fas fa-comments"></i>
+      &nbsp;
+      <span class="disqus-comment-count" data-disqus-identifier="posts/2021-02-03-current-state-of-experimental-design-r-packages/">Comment on this article</span>
+    </span>
+    <span class="article-sharing">
+      Share: &nbsp;
+      <a href="https://twitter.com/share?text=Current%20state%20of%20R%20packages%20for%20the%20design%20of%20experiments&amp;url=https%3A%2F%2Fjixing.org%2Fposts%2F2021-02-03-current-state-of-experimental-design-r-packages%2F">
+        <i class="fab fa-twitter"></i>
+      </a>
+      <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fjixing.org%2Fposts%2F2021-02-03-current-state-of-experimental-design-r-packages%2F&amp;title=Current%20state%20of%20R%20packages%20for%20the%20design%20of%20experiments">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </span>
+  </p>
+  <script id="dsq-count-scr" src="https://statistical-genetics.disqus.com/count.js" async></script>
+  <div id="disqus_thread" class="hidden"></div>
+  <script type="text/javascript" cookie-consent="functionality">
+var disqus_config = function () {
+  this.page.url = 'https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/';
+  this.page.identifier = 'posts/2021-02-03-current-state-of-experimental-design-r-packages/';
+};
+(function() {
+  var d = document, s = d.createElement('script');
+  s.src = 'https://statistical-genetics.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', +new Date());
+  (d.head || d.body).appendChild(s);
+})();
+</script>
+  <p>
+    <div class="subscribe"><form method='post' action='https://blogtrottr.com'>
+  <p>Enjoy this blog? Get notified of new posts via email:</p>
+  <input type='text' name='btr_email' />
+  <input type='hidden' name='btr_url'
+         value='https://emitanaka.org/blog.xml'/>
+  <input type='hidden' name='schedule_type' value='0' />
+  <input type='submit' value='Subscribe' />
+</form></div>
+  </p>
+</div>
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom">
+  <h3 id="references">References</h3>
+  <div id="references-listing"></div>
+  <h3 id="updates-and-corrections">Corrections</h3>
+  <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/jixing475/jixing.github.io/issues/new">create an issue</a> on the source repository.</p>
+  <h3 id="reuse">Reuse</h3>
+  <p>Text and figures are licensed under Creative Commons Attribution <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Source code is available at <a href="https://github.com/jixing475/jixing.github.io">https://github.com/jixing475/jixing.github.io</a>, unless otherwise noted. The figures that have been reused from other sources don't fall under this license and can be recognized by a note in their caption: "Figure from ...".</p>
+  <h3 id="citation">Citation</h3>
+  <p>For attribution, please cite this work as</p>
+  <pre class="citation-appendix short">Liu (2021, Feb. 3). Jixing Liu: Current state of R packages for the design of experiments. Retrieved from https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/</pre>
+  <p>BibTeX citation</p>
+  <pre class="citation-appendix long">@misc{liu2021current,
+  author = {Liu, Jixing},
+  title = {Jixing Liu: Current state of R packages for the design of experiments},
+  url = {https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/},
+  year = {2021}
+}</pre>
+</div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<div class="distill-site-nav distill-site-footer">
+  <p>© Copyright 2021 Jixing Liu</p>
+  <p>
+    <span style="font-size:0.6rem;"><i class="fas fa-wrench"/> The site made with the distill R-package <i class="fab fa-r-project"/> powered by the distill web framework <i class="fab fa-js"/></span>
+  </p>
+</div>
+<!--/radix_placeholder_navigation_after_body-->
+
+
+</body>
+
+</html>

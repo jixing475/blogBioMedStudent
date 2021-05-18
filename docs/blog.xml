@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Jixing Liu</title>
+    <link>https://jixing.org</link>
+    <atom:link href="https://jixing.org/blog.xml" rel="self" type="application/rss+xml"/>
+    <description>Jixing's website and blog that mainly features about
+statistics, data science, Bioinformatics, R&amp;Python and academia. 
+</description>
+    <image>
+      <title>Jixing Liu</title>
+      <url>https://jixing.org/images/avatar.png</url>
+      <link>https://jixing.org</link>
+    </image>
+    <generator>Distill</generator>
+    <lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Current state of R packages for the design of experiments</title>
+      <dc:creator>Jixing Liu</dc:creator>
+      <link>https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages</link>
+      <description>Your analytical toolkit matters very little if the data are no good. Ideally you want to know to how the data were collected before delving into the analysis of the data; better yet, get involved _before_ the collection of data and design its collection. In this post I explore some of the top downloaded R packages for the design of experiments and analysis of experimental data.</description>
+      <category>experimental design</category>
+      <category>R</category>
+      <guid>https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages</guid>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://jixing.org/posts/2021-02-03-current-state-of-experimental-design-r-packages/figures/download-timeplot-1.png" medium="image" type="image/png" width="1248" height="1344"/>
+    </item>
+  </channel>
+</rss>
