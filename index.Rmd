@@ -1,5 +1,5 @@
 ---
-title: BioMedStudent
+title: Stay Hungry, Stay Foolish
 site: distill::distill_website
 ---
 <style>
