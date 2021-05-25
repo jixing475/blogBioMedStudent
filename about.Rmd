@@ -14,6 +14,8 @@ output:
 <img  src="images/avatar.jpg" alt="Profile photo">  
 </div>
 
+I am passionate about **applying Biostatistics and Machine Learning to Life Science Data**. I am exited about understanding the world through the data from any Biotech, Biomedicine or Biopharma area.
+
 <!-- I'm a lecturer (equivalent to assistant professor) in statistics at Monash -->
 <!-- University, Melbourne, Australia and part of the [NUMBATs group](https://numbat.space/). Research-wise, I'm interested in developing useful statistical tools and methods. My experience in application is in bioinformatics and agriculture (particularly crop breeding). My active research areas are **experimental design**, **mixed models** and **statistical graphics**.  -->
 
