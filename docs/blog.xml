@@ -13,14 +13,17 @@ statistics, data science, Bioinformatics, R&amp;Python and academia.
       <link>https://jixing475.github.io/blogBioMedStudent/</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 17 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>ISLR_tree_based_methods</title>
+      <title>ISLR Machine Learning </title>
       <dc:creator>Jixing Liu</dc:creator>
       <link>https://jixing475.github.io/blogBioMedStudent/posts/2021-06-17-islrtreebasedmethods</link>
       <description>A short description of the post.</description>
+      <category>machine learning</category>
+      <category>R</category>
       <guid>https://jixing475.github.io/blogBioMedStudent/posts/2021-06-17-islrtreebasedmethods</guid>
-      <pubDate>Thu, 17 Jun 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://jixing475.github.io/blogBioMedStudent/posts/2021-06-17-islrtreebasedmethods/islrtreebasedmethods_photo/image-20210617171443567.png" medium="image" type="image/png" width="1715" height="948"/>
     </item>
     <item>
       <title>Current state of R packages for the design of experiments</title>

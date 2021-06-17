@@ -1,53 +1,50 @@
 ---
-title: "ISLR_tree_based_methods"
+title: "ISLR Machine Learning "
 description: |
   A short description of the post.
 author:
   - name: Jixing Liu
     url: https://emitanaka.org
-date: 06-17-2021
+    affiliation: Monash University
+    affiliation_url: https://numbat.space/
+date: 2021-02-03
+draft: false
+categories: [machine learning, R]
 output:
   distill::distill_article:
     self_contained: false
+    highlight: default
+    toc: true
+    #highlight_downlit: false # downlit makes attr.source not work
+    toc_float: true
+preview: "islrtreebasedmethods_photo/image-20210617171443567.png"
 ---
 
+```{r knit-setup, include=FALSE}
+knitr::knit_hooks$set(toggle = function(before, options) {
+  if(options$toggle) {
+    ifelse(before, "<div class='toggle-code'>", "</div>")
+  }
+})
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-  echo = TRUE,      # Output code chunks
-  message = FALSE,  # Toggle off message output 
-  warning = FALSE,    # Toggle off warning output
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "graphics/knitr-",
-  fig.retina = 2, # Control using dpi
-  fig.width = 6,  # generated images
-  fig.pos = "t",  # pdf mode
-  fig.align = "center",
-  dpi = if (knitr::is_latex_output()) 72 else 300, 
-  out.width = "100%",
-  dev = "svg",
-  dev.args = list(png = list(type = "cairo-png")),
-  optipng = "-o1 -quiet") 
 
-library(reticulate)
-# reticulate::py_config()
-# knitr::opts_knit$set(root.dir = usethis::proj_path())
+knitr::opts_chunk$set(echo = TRUE, 
+                      toggle = TRUE,
+                      cache = TRUE,
+                      cache.path = "cache/",
+                      fig.align = "center",
+                      fig.path = "figures/")
 
-# libraries used in report
-library(knitr)
-library(kableExtra)
-library(tidyverse)
-
-theme_set(theme_light(base_family = "Avenir"))
 ```
 
 
 
+ ![](islrtreebasedmethods_photo/image-20210617171443567.png)
+
 
 
 ## load pkg
-```{r}
+```{r load_pkg, include=FALSE}
 library(tidyverse)
 library(reticulate)
 
