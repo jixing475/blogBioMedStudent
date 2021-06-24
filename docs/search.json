@@ -4,7 +4,7 @@
       "path": "404.html",
       "author": [],
       "contents": "\n\nOops! The page you’re looking for can’t be found!\n\n\n\nd-title {\n  display: none;\n}\n\n\n\n\n\n\n",
-      "last_modified": "2021-05-25T15:45:29+08:00"
+      "last_modified": "2021-06-24T17:21:47+08:00"
     },
     {
       "path": "about.html",
@@ -12,7 +12,7 @@
       "description": "",
       "author": [],
       "contents": "\n\n\n\n\nJixing Liu\nHome\nPost\nResources\nAbout\n\n\n\n\n\n\n\n\n\n\n\n☰\n\n\n  \n    \n      \n        \n        \n        \n      \n      \n    \n    \n      \n  Home\n\n\n  Post\n\n\n  Resources\n\n\n  About\n\n      \n  \n    \n     \n  \n\n\n  \n    \n     \n  \n\n\n  \n    \n     \n  \n\n      \n  \n\n\n\n\n\n\nI am passionate about applying Biostatistics and Machine Learning to Life Science Data. I am exited about understanding the world through the data from any Biotech, Biomedicine or Biopharma area.\n\n\n\n\n\n\n\nLoading my github calendar data.\n\n\n\n\nGitHubCalendar(\".calendar\", \"emitanaka\", { responsive: true });\n\n\n\n(function() {\n  var i, s, j, el, els;\n  var create_el = function(type, className, content, isHTML) {\n    var el = document.createElement(type);\n    if (className) el.className = className;\n    if (content) {\n      if (isHTML) {el.innerHTML = content;} else {el.innerText = content;}\n    }\n    return el;\n  }\n})();\n\n© Copyright 2021 Jixing Liu\n The site made with the distill R-package  powered by the distill web framework \n\n\n\n\n\n  ",
-      "last_modified": "2021-05-25T15:45:29+08:00"
+      "last_modified": "2021-06-24T17:21:47+08:00"
     },
     {
       "path": "blog.html",
@@ -20,14 +20,14 @@
       "description": "This blog contains a mixture of posts on statistics, data science, Bioinformatics, R&Python and academia. \n",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2021-05-25T15:45:30+08:00"
+      "last_modified": "2021-06-24T17:21:48+08:00"
     },
     {
       "path": "index.html",
       "title": "Stay Hungry, Stay Foolish",
       "author": [],
       "contents": "\n\nd-appendix {\n display: none!important;\n}\n.twitter-border {\n border: 1px dashed black;\n width: 300px;\n position : relative;\n border-radius: 5px;\n margin-left: 40px;\n}\n.twitter-border::before {\n content: \"\\f099\";\n font-family: \"Font Awesome 5 Brands\";\n font-weight: 900; \n font-size: 1.5rem;\n position: absolute;\n top: -15px;\n left: -15px;\n}\n\n.twitter-border > p {\n  margin-block-start: 0em;\n  margin-block-end: 0em;\n  margin-bottom: 0em;\n}\nRecent news\n这是你的主界面\nnestr R-package is now on CRAN\n\n\n\n\n\n\n\n\n\n\n",
-      "last_modified": "2021-05-25T15:45:30+08:00"
+      "last_modified": "2021-06-24T17:21:48+08:00"
     },
     {
       "path": "resources.html",
@@ -35,7 +35,7 @@
       "description": "This section contains some resources that are perhaps useful for others.",
       "author": [],
       "contents": "\n\nd-title {\n display:none;\n}\nd-article li, d-article ul {\n  margin-bottom: 0em;\n}\n.small {\n  font-size: 0.8rem;\n}\nResources\nAustralia\nProfessional societies\nStatistical Society of Australia\nANZSTAT forum:\nGeneral topics\nEvent announcment\nJob vancancies and scholarships\n\nEvents listing\n\nInternational Biometrics Society Australasia Region\nAustralian Mathematical Society\n\nThe society is (rightfully) mathematics oriented but occasionally features statistics. Contrary to common belief, statistics is not a subset of mathematics, although some areas of statistics have a large intersection with the field.\nFor women, Women in Mathematics Special Interest Group (WIMSIG) may be of interest. I find their newsletter to be excellent.\n\nLearning R\nAustralian Local R-Ladies Chapters:\nR-Ladies Melbourne  \nR-Ladies Sydney  \nR-Ladies Canberra  \nR-Ladies Perth  \nR-Ladies Adelaide  \nR-Ladies Brisbane  \n\nR for data science community  \nTidy Tuesday\nBig Book of R\n\n\n\n",
-      "last_modified": "2021-05-25T15:45:31+08:00"
+      "last_modified": "2021-06-24T17:21:49+08:00"
     }
   ],
   "collections": ["posts/posts.json"]

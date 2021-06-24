@@ -26,17 +26,6 @@ statistics, data science, Bioinformatics, R&amp;Python and academia.
       <media:content url="https://jixing475.github.io/blogBioMedStudent/posts/2021-06-24-ml-review/ml-review_images/image-20210624170933171.png" medium="image" type="image/png" width="1244" height="1014"/>
     </item>
     <item>
-      <title>ISLR Machine Learning </title>
-      <dc:creator>Jixing Liu</dc:creator>
-      <link>https://jixing475.github.io/blogBioMedStudent/posts/2021-06-17-islrtreebasedmethods</link>
-      <description>A short description of the post.</description>
-      <category>machine learning</category>
-      <category>R</category>
-      <guid>https://jixing475.github.io/blogBioMedStudent/posts/2021-06-17-islrtreebasedmethods</guid>
-      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://jixing475.github.io/blogBioMedStudent/posts/2021-06-17-islrtreebasedmethods/islrtreebasedmethods_photo/image-20210617171443567.png" medium="image" type="image/png" width="1715" height="948"/>
-    </item>
-    <item>
       <title>Current state of R packages for the design of experiments</title>
       <dc:creator>Jixing Liu</dc:creator>
       <link>https://jixing475.github.io/blogBioMedStudent/posts/2021-02-03-current-state-of-experimental-design-r-packages</link>
@@ -46,6 +35,17 @@ statistics, data science, Bioinformatics, R&amp;Python and academia.
       <guid>https://jixing475.github.io/blogBioMedStudent/posts/2021-02-03-current-state-of-experimental-design-r-packages</guid>
       <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
       <media:content url="https://jixing475.github.io/blogBioMedStudent/posts/2021-02-03-current-state-of-experimental-design-r-packages/figures/download-timeplot-1.png" medium="image" type="image/png" width="1248" height="1344"/>
+    </item>
+    <item>
+      <title>ISLR Machine Learning </title>
+      <dc:creator>Jixing Liu</dc:creator>
+      <link>https://jixing475.github.io/blogBioMedStudent/posts/2021-06-17-islrtreebasedmethods</link>
+      <description>A short description of the post.</description>
+      <category>machine learning</category>
+      <category>R</category>
+      <guid>https://jixing475.github.io/blogBioMedStudent/posts/2021-06-17-islrtreebasedmethods</guid>
+      <pubDate>Wed, 03 Feb 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://jixing475.github.io/blogBioMedStudent/posts/2021-06-17-islrtreebasedmethods/islrtreebasedmethods_photo/image-20210617171443567.png" medium="image" type="image/png" width="1715" height="948"/>
     </item>
   </channel>
 </rss>
