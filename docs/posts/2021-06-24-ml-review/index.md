@@ -16,7 +16,7 @@ output:
     #highlight_downlit: false # downlit makes attr.source not work
     toc_float: true
     keep_md: yes
-preview: "islrtreebasedmethods_photo/image-20210617171443567.png"
+preview: "ml-review_images/image-20210624170933171.png"
 ---
 
 
@@ -1463,7 +1463,9 @@ Lastly, we apply the model to the test data and examine some final metrics. We a
 </div>
 
 
+# Ref
 
+[Advanced Data Science in R: Machine Learning review with an intro to the tidymodels package](https://advanced-ds-in-r.netlify.app/posts/2021-03-16-ml-review/)
 
 ```{.r .distill-force-highlighting-css}
 ```

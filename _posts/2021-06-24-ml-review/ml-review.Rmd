@@ -16,7 +16,7 @@ output:
     #highlight_downlit: false # downlit makes attr.source not work
     toc_float: true
     keep_md: yes
-preview: "islrtreebasedmethods_photo/image-20210617171443567.png"
+preview: "ml-review_images/image-20210624170933171.png"
 ---
 
 ```{r knit-setup, include=FALSE}
