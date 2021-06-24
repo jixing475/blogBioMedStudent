@@ -84,6 +84,7 @@ data <- data %>%
 
 
 ```
+
 ## split data
 ```{r}
 set.seed(123)
@@ -132,9 +133,13 @@ clf1 = setup(data=train_data,
              normalize=True,
              ignore_low_variance=True,
              session_id=123,
+             log_experiment = True, 
+             experiment_name = 'jixing',
              html = False, silent=True
             )  
 ```
+
+
 
 ## auto ML
 
@@ -151,8 +156,13 @@ blender = blend_models(estimator_list = top5)
 best = automl(optimize = 'Recall')
 ```
 
+## mlflow
+
+run this in terminal: mlflow ui
+
+
 ## model compare
-```{python}
+```{python eval=FALSE, include=FALSE}
 models()
 # 比较所有模型
 res_compare_models = compare_models(sort = "AUC")
@@ -161,7 +171,7 @@ res_compare_models = compare_models(sort = "AUC")
 
 ## create and tune model
 
-```{python}
+```{python eval=FALSE, include=FALSE}
 model = create_model('lr')
 # 模型调参
 model_tuned = tune_model(model, optimize = "AUC", n_iter = 10)

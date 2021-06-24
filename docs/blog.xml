@@ -13,7 +13,17 @@ statistics, data science, Bioinformatics, R&amp;Python and academia.
       <link>https://jixing475.github.io/blogBioMedStudent/</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 03 Feb 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 24 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Machine Learning review with an intro to the tidymodels package</title>
+      <dc:creator>Jixing Liu</dc:creator>
+      <link>https://jixing475.github.io/blogBioMedStudent/posts/2021-06-24-ml-review</link>
+      <description>A short description of the post.</description>
+      <category>machine learning</category>
+      <category>R</category>
+      <guid>https://jixing475.github.io/blogBioMedStudent/posts/2021-06-24-ml-review</guid>
+      <pubDate>Thu, 24 Jun 2021 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>ISLR Machine Learning </title>
       <dc:creator>Jixing Liu</dc:creator>
