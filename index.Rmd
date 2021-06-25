@@ -32,9 +32,9 @@ d-appendix {
 
 ## Recent news
 
-这是你的主界面
+<img src="https://gitee.com/jixing475/tuchuang/raw/master/uPic/10%20Books%20That%20Changed%20My%20life.%20Deep%20Work%20%20by%20Jonas%20Altman%20%20Jun,%202021.png"  width="320" height="180" />
 
-[`nestr` R-package](https://github.com/emitanaka/nestr) is now on CRAN
+[tidymodels review](https://jixing475.github.io/blogBioMedStudent/posts/2021-06-24-ml-review/)
 
 <br>
 

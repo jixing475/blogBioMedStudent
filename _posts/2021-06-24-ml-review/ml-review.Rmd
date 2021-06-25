@@ -15,7 +15,7 @@ output:
     toc: true
     #highlight_downlit: false # downlit makes attr.source not work
     toc_float: true
-    keep_md: yes
+    keeo_md: true
 preview: "ml-review_images/image-20210624170933171.png"
 ---
 
@@ -27,13 +27,25 @@ knitr::knit_hooks$set(toggle = function(before, options) {
 })
 
 
-knitr::opts_chunk$set(echo = TRUE, 
-                      toggle = TRUE,
-                      cache = TRUE,
-                      cache.path = "cache/",
-                      fig.align = "center",
-                      fig.path = "figures/")
-
+knitr::opts_chunk$set(
+  echo = TRUE,      # Output code chunks
+  message = FALSE,  # Toggle off message output 
+  warning = FALSE,    # Toggle off warning output
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "figures/",
+  fig.retina = 2, # Control using dpi
+  fig.width = 6,  # generated images
+  fig.pos = "t",  # pdf mode
+  cache.path = "cache/",
+  fig.align = "center",
+  dpi = if (knitr::is_latex_output()) 72 else 300, 
+  out.width = "100%",
+  dev = "svg",
+  dev.args = list(png = list(type = "cairo-png")),
+  optipng = "-o1 -quiet") 
+library(ggplot2)
+ggplot2::theme_set(theme_light())
 ```
 
 ```{r echo=FALSE}
@@ -55,35 +67,6 @@ knit_print.data.frame <- function(x, ...) {
 registerS3method("knit_print", "data.frame", knit_print.data.frame)
 ```
 
-## Follow along
-
-You can download this .Rmd file below if you'd like to follow along. I do have a few hidden notes you can disregard. This document is a distill_article, so you may want to change to an html_document to knit. You will also need to delete any image references to properly knit, since you won't have those images.
-
-```{r, echo=FALSE}
-download_file(
-  path = here::here("_posts/2021-06-24-ml-review/ml-review.Rmd"),
-  button_label = "Download .Rmd file",
-  button_type = "info",
-  has_icon = TRUE,
-  icon = "fa fa-save",
-  self_contained = FALSE
-)
-```
-
-## Resources
-
-Here are some great resources. I will reference some of them throughout.
-
-* [Hands on Machine Learning with R](https://bradleyboehmke.github.io/HOML/) (HOML, for short) by Bradley Boehmke and Brandon Greenwell is the textbook I used in the Machine Learning course I taught in spring of 2020. It is a great place to go to review some of the model algorithms and concepts.  
-
-* [ISLR](https://www.statlearning.com/) by James, Witten, Hastie, and Tibshirani goes deeper into the math of the algorithms. You can download their book at this site.
-
-* Tidymodels
-  - [Lisa's tidymodels noRth presentation](https://youtu.be/tVZO-aoXStE) gives an example of using `tidymodels`. I will go through the same example below, with a few added parts. The code has changed slightly in some places, too.
-  - [tidymodels.org](https://www.tidymodels.org/), specifically the [case study](https://www.tidymodels.org/start/case-study/), walks through examples of using the `tidymodels` suite.  
-  - [Tidy Models with R textbook](https://www.tmwr.org/) by Julia Silge and Max Kuhn provides more in-depth explanations of the `tidymodels` functions with extended examples.
-  - [Julia Silge's blog](https://juliasilge.com/) with even more examples!
-
 ## Review
 
 Most of you probably learned about machine learning algorithms using the `caret` R package. Before jumping into the new `tidymodels` package, let's remember some of the key machine learning concepts. 
@@ -94,26 +77,21 @@ Let's start with an overview of the process. You covered many of these in your m
 >
 > 这是一本很棒的讲机器学习的书籍
 
-
-
-![image-20210624143944804](ml-review_images/image-20210624143944804.png)
-
-<div class="centered">
-</div>
-
-
-![image-20210624143407974](ml-review_images/image-20210624143407974.png)
-
 And let's review what we do during each of these steps.
 
 1. **Quick exploration**: **Read** in the data, check **variable types**, find which values each variable takes and **how often**, check **distributions** of quantitative variables, explore **missing values**.  📌 DO NOT do any modeling or transforming of data in this step(现在还不是做数据转换的时候).  
+
 2. **Data splitting**: Split the data into **training and testing sets**. The testing dataset will not be used again until the very end. 
+
 3. **Data pre-processing**: More in-depth data exploration, **feature engineering**, **variable transformations**. This step is usually pretty time-consuming.  
+
 4. **Fitting model(s)**: Fit the models of interest on the training data.  
+
 5. **Tuning parameters**: If the model in the previous step involved tuning parameters, use cross-validation (or similar method) to find the best parameter.  
+
 6. **Evaluate & compare models**: Use cross-validation to evaluate the model. If you have a large number of models you are evaluating, you will probably limit the set of models to your best/favorite few during this step. The image below is to help you remember that process, which I have also written about below.
 
-![image-20210624144138235](ml-review_images/image-20210624144138235.png)
+   
 
   - In **$k$-fold cross-validation**, we divide the data randomly into $k$ approximately equal groups or *folds*. The schematic here shows 5-fold cross-validation.  
   - The model is fit on $k-1$ of the folds and the remaining fold is used to evaluate the model. Let's look at the first row in the schematic. Here the model is fit on the data that are in folds 2, 3, 4, and 5. The model is evaluated on the data in fold 1.  
@@ -137,9 +115,7 @@ $$
 
 In this section, I will show how we can use the **tidymodels** framework to execute the modeling process. I've updated the diagram from above to include some of the libraries and functions we'll use throughout the process. 
 
-<center>
 
-![image-20210624144525718](ml-review_images/image-20210624144525718.png)
 
 ![image-20210624145832107](ml-review_images/image-20210624145832107.png)
 
@@ -168,6 +144,8 @@ data("house_prices")
 
 house_prices %>% 
   slice(1:5)
+
+data <- house_prices
 ```
 
 Now, we will dig into each of the modeling steps listed above.
@@ -179,19 +157,9 @@ Take a quick look at distributions of all the variables to check for anything ir
 Quantitative variables:
 
 ```{r expl_quant, fig.width=6, fig.height=4}
-# house_prices %>% 
-#   select(where(is.numeric)) %>% 
-#   pivot_longer(cols = everything(),
-#                names_to = "variable", 
-#                values_to = "value") %>% 
-#   ggplot(aes(x = value)) +
-#   geom_histogram(bins = 30) +
-#   facet_wrap(vars(variable), 
-#              scales = "free")
-
-house_prices %>% 
+data %>% 
   select(where(is.numeric)) %>% 
-  DataExplorer::plot_histogram(theme_config = theme_minimal())
+  plot_histogram(theme_config = theme_minimal())
 ```
 
 Things I noticed and pre-processing thoughts:
@@ -205,20 +173,9 @@ Things I noticed and pre-processing thoughts:
 Categorical variables:
 
 ```{r expl_cat}
-# house_prices %>% 
-#   select(where(is.factor)) %>% 
-#   pivot_longer(cols = everything(),
-#                names_to = "variable", 
-#                values_to = "value") %>% 
-#   ggplot(aes(x = value)) +
-#   geom_bar() +
-#   facet_wrap(vars(variable), 
-#              scales = "free", 
-#              nrow = 2)
-
-house_prices %>%
+data %>%
   select(where(is.factor)) %>%
-  DataExplorer::plot_bar()
+  plot_bar(theme_config = theme_light()) 
 ```
 
 Things I noticed and pre-processing thoughts:
@@ -228,7 +185,7 @@ Things I noticed and pre-processing thoughts:
 * We might consider using the **month the house was sold** as a variable:
 
 ```{r}
-house_prices %>% 
+data %>% 
   count(month = month(date, label = TRUE)) %>% 
   ggplot() +
   geom_col(aes(x = month, y = n))
@@ -237,7 +194,7 @@ house_prices %>%
 * And, we quickly look at the counts for the `waterfront` variable. Not many houses are waterfront properties.  
 
 ```{r}
-house_prices %>% 
+data %>% 
   count(waterfront)
 ```
 
@@ -246,7 +203,7 @@ house_prices %>%
 * Before moving on, let's use the `add_n_miss()`(对行进行缺失值计算统计) function from the `naniar` library to see if we have any missing values. And it appears that there aren't any missing values - lucky us!
 
 ```{r}
-house_prices %>% 
+data %>% 
   add_n_miss() %>% 
   count(n_miss_all)
 ```
@@ -269,18 +226,18 @@ The `initial_split()` function from the `rsample` library (part of `tidymodels`)
 ```{r init_split}
 set.seed(327) #for reproducibility
 
-house_prices <- house_prices %>% 
+data <- data %>% 
   mutate(log_price = log(price, base = 10)) %>% 
   select(-price)
 
 # Randomly assigns 75% of the data to training.
-house_split <- initial_split(house_prices, 
-                             prop = .75)
-house_split
+init_split <- initial_split(data,
+                            prop = .75)
+init_split
 #<training/testing/total>
 
-house_training <- training(house_split)
-house_testing <- testing(house_split)
+data_training <- training(init_split)
+data_testing <- testing(init_split)
 ```
 
 ### 3. Data pre-processing
@@ -298,8 +255,8 @@ house_testing <- testing(house_split)
 * The `update_roles()` function is used to change the **roles of some variables**. For us, these are variables we may want to include for evaluation purposes but will not be used in building the model. I chose the role of `evaluative` but you could name that role anything you want, eg. `id`, `extra`, `junk` (maybe a bad idea?).
 
 ```{r recipe}
-house_recipe <- recipe(log_price ~ ., #short-cut, . = all other vars
-                       data = house_training) %>% 
+data_recipe <- recipe(log_price ~ ., #short-cut, . = all other vars
+                       data = data) %>% 
   # Pre-processing:
   # Remove, redundant to sqft_living and sqft_lot
   step_rm(sqft_living15, sqft_lot15) %>%
@@ -362,14 +319,14 @@ For example, notice the names of the variables are the same as before but they h
 
 ```{r apply_recipe}
 training_data_prepared <- 
-house_recipe %>% 
-  prep(house_training) %>%
+data_recipe %>% 
+  prep(data_training) %>%
   # using bake(new_data = NULL) gives same result as juice()
   # bake(new_data = NULL)
   juice() 
 
 training_data_prepared %>% 
-  plot_histogram()
+  plot_histogram(theme_config = theme_light())
 ```
 
 ### 4. Fitting model(s)
@@ -386,7 +343,7 @@ In order to define our model, we need to do these steps:
 * (OPTIONAL) Set arguments to tune. We'll see an example of this later.
 
 ```{r linear_mod}
-house_linear_mod <- 
+data_lm_model <- 
   # Define a linear regression model
   linear_reg() %>% 
   # Set the engine to "lm" (lm() function is used to fit model)
@@ -394,34 +351,34 @@ house_linear_mod <-
   # Not necessary here, but good to remember for other models
   set_mode("regression")
 
-house_linear_mod
+data_lm_model
 ```
 
 This is just setting up the process. We haven't fit the model to data yet, and there's still one more step before we do - creating a **workflow**! This combines the preprocessing and model definition steps.
 
 ```{r workflow}
-house_lm_wf <- 
+data_lm_wf <- 
   # Set up the workflow
   workflow() %>% 
   # Add the recipe
-  add_recipe(house_recipe) %>% 
+  add_recipe(data_recipe) %>% 
   # Add the modeling
-  add_model(house_linear_mod)
+  add_model(data_lm_model)
 # 这里有点像是 scikit-learn 里面的创建模型对象, 只是这个包含了 rawdata input ➡ data processing  ➡  ready to fit data
-house_lm_wf
+data_lm_wf
 ```
 
 Now we are finally ready to fit the model! After all that work, this part seems easy. We first use the `fit()` function to fit the model, telling it **which data set we want to fit the model to**. Then we use some other functions to display the results nicely.
 
 ```{r fit_lm}
-house_lm_fit <- 
+data_lm_fit <- 
   # Tell it the workflow
-  house_lm_wf %>% 
+  data_lm_wf %>% 
   # Fit the model to the training data
-  fit(house_training)
+  fit(data_training)
 
 # Display the results nicely
-house_lm_fit %>% 
+data_lm_fit %>% 
   pull_workflow_fit() %>% 
   tidy() %>% 
   mutate(across(where(is.numeric), ~round(.x,3))) 
@@ -438,7 +395,7 @@ To evaluate the model, we will use cross-validation (CV), specifically 5-fold CV
 
 ```{r cv}
 set.seed(1211) # for reproducibility
-house_cv <- vfold_cv(house_training, v = 5)
+data_cv <- vfold_cv(data_training, v = 5)
 ```
 
 Then, we fit the model using the 5-fold dataset we just created (When I first did this, I thought I wouldn't have to do both the previous step of fitting a model on the training data AND this step, but I couldn't figure out how to extract the final model from the CV data ... so this was my solution at the time ... and it turns out you DO need to do both as noted by Julia Silge in this [ 📌 tidymodels: fastest way to extract a model object from fit_resamples() results - Machine Learning and Modeling - RStudio Community](https://community.rstudio.com/t/tidymodels-fastest-way-to-extract-a-model-object-from-fit-resamples-results/73301/3).
@@ -446,22 +403,22 @@ Then, we fit the model using the 5-fold dataset we just created (When I first di
 ```{r fit_model_cv}
 set.seed(456) # For reproducibility - not needed for this algorithm
 
-house_lm_fit_cv <-
+data_lm_fit_cv <-
   # Tell it the workflow
-  house_lm_wf %>% 
+  data_lm_wf %>% 
   # 📝  Fit the model (using the workflow) to the cv data: fit_resamples 
-  fit_resamples(house_cv)
+  fit_resamples(data_cv)
 
 # The evaluation metrics for each fold:
-house_lm_fit_cv %>% 
+data_lm_fit_cv %>% 
   select(id, .metrics) %>% 
   unnest(.metrics) 
 
 # Evaluation metrics averaged over all folds:
-collect_metrics(house_lm_fit_cv)
+collect_metrics(data_lm_fit_cv)
 
 # Just to show you where the averages come from:
-house_lm_fit_cv %>% 
+data_lm_fit_cv %>% 
   select(id, .metrics) %>% 
   unnest(.metrics) %>% 
   group_by(.metric, .estimator) %>% 
@@ -477,23 +434,23 @@ In this simple scenario, we may be interested in seeing **how the model performs
 After the model is fit and applied, we collect the performance metrics and display them and show the predictions from the testing data. Notice the the RMSE here is very similar to the cross-validated RMSE we computed in the previous step. 
 
 ```{r fit_test}
-house_lm_test <- 
+data_lm_test <- 
   # The modeling work flow
-  house_lm_wf %>% 
+  data_lm_wf %>% 
   # Use training data to fit the model and apply it to testing data
-  last_fit(house_split)
+  last_fit(init_split)
 
 # performance metrics from testing data
-collect_metrics(house_lm_test)
+collect_metrics(data_lm_test)
 
 # predictions from testing data
-collect_predictions(house_lm_test) 
+collect_predictions(data_lm_test) 
 ```
 
 The code below creates a simple plot to examine predicted vs. actual price (log base 10) from the house data. 
 
 ```{r act_pred_plot}
-collect_predictions(house_lm_test) %>% 
+collect_predictions(data_lm_test) %>% 
   ggplot(aes(x = log_price, 
              y = .pred)) +
   geom_point(alpha = .5, 
@@ -509,7 +466,7 @@ collect_predictions(house_lm_test) %>%
 Here is the same plot using the **regular price scale(使用 Y 的真实值, 而非转换后的值)**.
 
 ```{r price_pred_plot}
-collect_predictions(house_lm_test) %>% 
+collect_predictions(data_lm_test) %>% 
   ggplot(aes(x = 10^log_price, 
              y = 10^.pred)) +
   geom_point(alpha = .5, 
@@ -555,7 +512,7 @@ I originally tried to solve this problem by adding `skip = TRUE` to the `step_lo
 
 ```{r pred-single}
 predict(
-  house_lm_fit,
+  data_lm_fit,
   new_data = tibble(id = "0705700390",
                     date = ymd("2014-09-03"),
                     bedrooms = 3,
@@ -582,7 +539,7 @@ predict(
 )
 
 predict(
-  house_lm_fit,
+  data_lm_fit,
   new_data = tibble(id = "0705700390",
                     date = ymd("2014-09-03"),
                     bedrooms = 3,
@@ -618,7 +575,7 @@ fake_new_data <- house_prices %>%
   sample_n(20) %>% 
   mutate(extra_var = 1:20)
 
-predict(house_lm_fit, 
+predict(data_lm_fit, 
         fake_new_data)
 ```
 
@@ -626,7 +583,7 @@ Since the `predict()` function will always return the same number of rows and in
 
 ```{r pred-bind}
 fake_new_data %>% 
-  bind_cols(predict(house_lm_fit,
+  bind_cols(predict(data_lm_fit,
                     fake_new_data)) 
 ```
 
@@ -634,14 +591,14 @@ We could also add a confidence interval and use the `relocate()` function to mov
 
 ```{r pred-bind-ci}
 fake_new_data %>% 
-  bind_cols(predict(house_lm_fit,
+  bind_cols(predict(data_lm_fit,
                     fake_new_data)) %>% 
-  bind_cols(predict(house_lm_fit,
+  bind_cols(predict(data_lm_fit,
                     fake_new_data, 
-                    type = "conf_int")) %>% 
+                    type = "conf_int")) 
   # put the pred col after the log_price col
-  relocate(log_price, starts_with(".pred"), 
-           .after = id)
+  # relocate(log_price, starts_with(".pred"), 
+  #          .after = id)
 ```
 
 ❓  What if we don't want to use the model in this R session? 
@@ -651,26 +608,26 @@ That would be quite a common occurrence. After building a model, we would often 
 1. Save the model using `saveRDS()`. This model is saved to the current project folder (assuming you're using a project right now), but you could save it anywhere you'd like.
 
 ```{r}
-saveRDS(house_lm_fit, "house_lm_fit.rds")
+saveRDS(data_lm_fit, "data_lm_fit.rds")
 ```
 
 2. Read the model back in using `readRDS()`. Go look at `house_lm_read` in the environment, and you'll see that, indeed, it is the workflow we saved! `r emo::ji("hugging_face")`
 
 ```{r}
-house_lm_read <- readRDS("house_lm_fit.rds")
+data_lm_read <- readRDS("data_lm_fit.rds")
 ```
 
 3. Use the model we read back in to predict new data. Just like we did before, we can use the `predict()` function to predict new values. I use the same `fake_new_data` I used before.
 
 ```{r pred-bind-ci-new}
 fake_new_data %>% 
-  bind_cols(predict(house_lm_read,
+  bind_cols(predict(data_lm_read,
                     fake_new_data)) %>% 
-  bind_cols(predict(house_lm_read,
+  bind_cols(predict(data_lm_read,
                     fake_new_data, 
-                    type = "conf_int")) %>% 
-  relocate(log_price, starts_with(".pred"), 
-           .after = id)
+                    type = "conf_int")) 
+  # relocate(log_price, starts_with(".pred"), 
+  #          .after = id)
 ```
 
 
@@ -683,7 +640,7 @@ Now we are going to try using [Least Absolute Shrinkage and Selection Operator (
 We will set up the model similar to how we set up the linear model, but add a `set_args()` function. The `tune()` argument to the `penalty` term is a placeholder. We are telling it that we are going to tune the penalty parameter later.
 
 ```{r lasso_mod}
-house_lasso_mod <- 
+data_lasso_mod <- 
   # Define a lasso model 
   # I believe default is mixture = 1(LASOO) so probably don't need 
   linear_reg(mixture = 1) %>% 
@@ -704,15 +661,15 @@ To see the arguments available for tuning, go to the [Explore Model Arguments](h
 And then we create a LASSO workflow. Notice that we're using the same recipe step that we used in the regular linear model.
 
 ```{r lasso_workflow}
-house_lasso_wf <- 
+data_lasso_wf <- 
   # Set up the workflow
   workflow() %>% 
   # Add the recipe
-  add_recipe(house_recipe) %>% 
+  add_recipe(data_recipe) %>% 
   # Add the modeling
-  add_model(house_lasso_mod)
+  add_model(data_lasso_mod)
 
-house_lasso_wf
+data_lasso_wf
 ```
 
 `r emo::ji("eyes")` Here's where some of the new steps come in. We use the `grid_regular()` function from the `dials` library to choose some values of the `penalty` parameter for us. Alternatively, we could give it a vector of values we want to try.
@@ -726,27 +683,27 @@ penalty_grid
 Then, use the `tune_grid()` function to fit the model using cross-validation for all `penalty_grid` values and evaluate on all the folds. 
 
 ```{r tune}
-house_lasso_tune <- 
-  house_lasso_wf %>% 
+data_lasso_tune <- 
+  data_lasso_wf %>% 
   tune_grid(
-    resamples = house_cv,
+    resamples = data_cv,
     grid = penalty_grid
     )
 
-house_lasso_tune
+data_lasso_tune
 ```
 
 Then look at the cross-validated results in a table.
 
 ```{r tune_results}
 # The rmse for each fold:
-house_lasso_tune %>% 
+data_lasso_tune %>% 
   select(id, .metrics) %>% 
   unnest(.metrics) %>% 
   filter(.metric == "rmse")
 
 # rmse averaged over all folds:
-house_lasso_tune %>% 
+data_lasso_tune %>% 
   collect_metrics() %>% 
   filter(.metric == "rmse") 
 ```
@@ -755,7 +712,7 @@ And, even better, we can visualize the results. We can see that the RMSE stays f
 
 ```{r tune-viz}
 # Visualize rmse vs. penalty
-house_lasso_tune %>% 
+data_lasso_tune %>% 
   collect_metrics() %>% 
   filter(.metric == "rmse") %>% 
   ggplot(aes(x = penalty, y = mean)) +
@@ -770,14 +727,14 @@ house_lasso_tune %>%
 We choose the best penalty parameter as the one with the smallest cross-validated RMSE. The `select_best()` function does this. 
 
 ```{r}
-house_lasso_tune %>% 
+data_lasso_tune %>% 
   show_best(metric = "rmse")
 ```
 
 
 ```{r best-tune}
 # Best tuning parameter by smallest rmse
-best_param <- house_lasso_tune %>% 
+best_param <- data_lasso_tune %>% 
   select_best(metric = "rmse")
 best_param
 ```
@@ -786,7 +743,7 @@ There are other ways you can select parameters, like `select_by_one_std_err()` w
 
 ```{r one-se-tune}
 # Best tuning parameter by smallest rmse
-one_se_param <- house_lasso_tune %>% 
+one_se_param <- data_lasso_tune %>% 
   select_by_one_std_err(metric = "rmse", desc(penalty))
 one_se_param
 ```
@@ -796,18 +753,18 @@ Because a larger penalty parameter will fit a simpler model (more terms will lik
 Once we choose the parameter we want, we adjust the workflow to include the best tuning parameter using the `finalize_workflow()` function.
 
 ```{r tune_wf}
-house_lasso_final_wf <- house_lasso_wf %>% 
+data_lasso_final_wf <- data_lasso_wf %>% 
   finalize_workflow(one_se_param)
-house_lasso_final_wf
+data_lasso_final_wf
 ```
 
 Now we could fit this to the training data and look at the resulting model. We can see a few of the terms have coefficients of 0 (although not as many as I would have expected).
 
 ```{r lasso_train}
-house_lasso_final_mod <- house_lasso_final_wf %>% 
-  fit(data = house_training)
+data_lasso_final_mod <- data_lasso_final_wf %>% 
+  fit(data = data_training)
 
-house_lasso_final_mod %>% 
+data_lasso_final_mod %>% 
   pull_workflow_fit() %>% 
   tidy() 
 ```
@@ -816,7 +773,7 @@ We can also visualize variable importance.
 
 ```{r vip}
 # Visualize variable importance
-house_lasso_final_mod %>% 
+data_lasso_final_mod %>% 
   pull_workflow_fit() %>% 
   vip()
 ```
@@ -825,16 +782,29 @@ Lastly, we apply the model to the test data and examine some final metrics. We a
 
 ```{r lasso_test}
 # Fit model with best tuning parameter(s) to training data and apply to test data
-house_lasso_test <- house_lasso_final_wf %>% 
-  last_fit(house_split)
+data_lasso_test <- data_lasso_final_wf %>% 
+  last_fit(init_split)
 
 # Metrics for model applied to test data
-house_lasso_test %>% 
+data_lasso_test %>% 
   collect_metrics()
 
 # Compare to regular linear regression results
-collect_metrics(house_lm_test)
+collect_metrics(data_lm_test)
 ```
+## Resources
+
+Here are some great resources. I will reference some of them throughout.
+
+* [Hands on Machine Learning with R](https://bradleyboehmke.github.io/HOML/) (HOML, for short) by Bradley Boehmke and Brandon Greenwell is the textbook I used in the Machine Learning course I taught in spring of 2020. It is a great place to go to review some of the model algorithms and concepts.  
+
+* [ISLR](https://www.statlearning.com/) by James, Witten, Hastie, and Tibshirani goes deeper into the math of the algorithms. You can download their book at this site.
+
+* Tidymodels
+  - [Lisa's tidymodels noRth presentation](https://youtu.be/tVZO-aoXStE) gives an example of using `tidymodels`. I will go through the same example below, with a few added parts. The code has changed slightly in some places, too.
+  - [tidymodels.org](https://www.tidymodels.org/), specifically the [case study](https://www.tidymodels.org/start/case-study/), walks through examples of using the `tidymodels` suite.  
+  - [Tidy Models with R textbook](https://www.tmwr.org/) by Julia Silge and Max Kuhn provides more in-depth explanations of the `tidymodels` functions with extended examples.
+  - [Julia Silge's blog](https://juliasilge.com/) with even more examples!
 
 # Ref
 

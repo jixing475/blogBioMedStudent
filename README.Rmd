@@ -11,3 +11,16 @@ output: github_document
 
 This repository contains the source files for site: https://jixing475.github.io/blogBioMedStudent/
 
+# check before publised
+
+1. check preview images
+
+2. rebuild website: 
+
+   <img src="README_images/image-20210624173248226.png" alt="" style="zoom:50%;" />
+
+
+3. 注意编译目录要是: project 目录, 如果新增的博客没有出现, 清理缓存, 重新编译
+
+
+
